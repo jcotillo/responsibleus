@@ -1,14 +1,29 @@
 <div class="border-form-div">
   <h2>Sign up</h2>
+  <a href="#" class="business-click">click here to sign up as a business</a>
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
+    <%= f.label :full_name %>
     <%= f.text_field :full_name, :autofocus => true, :placeholder => 'Full Name' %>
-   	<%= f.number_field :age, :placeholder => 'AGE', in: 18..75 %>
-   	<%= f.select :transportation, options_for_select(%w[Car Bicycle Bus/Train]) %>
-	<%= f.select :neighborhood, options_for_select(%w[Coral_Gables Brickell Miami_Beach Wynwood]) %>
+    <%=f.label :age %>
+    <%= f.number_field :age, :placeholder => 'AGE', in: 18..75 %><br>
+    <%=f.label :transportation %>
+    <%= f.select :transportation, options_for_select(%w[Bicycle Bus/Train Car]) %>
+    <%=f.label :neighborhood %>
+  <%= f.select :neighborhood, options_for_select(%w[Brickell Coral_Gables Miami_Beach Wynwood]) %>
     <%= f.email_field :email, :placeholder => 'Email address' %>
     <%= f.password_field :password, :placeholder => 'Password' %>
     <%= f.password_field :password_confirmation, :placeholder => 'Password confirmation' %>
+  <div class="business-signup">
+    <%= f.fields_for :business do |business_fields| %>
+        <%= business_fields.label :business_name %>
+        <%= business_fields.text_field :name%>
+         <%= business_fields.label :business_description %>
+        <%= business_fields.text_field :description%>
+         <%= business_fields.label :typeofbusiness %>
+        <%= business_fields.text_field :typeofbusiness %>
+      <% end %>
+  </div>
     <%= f.submit "Sign up",:class=>'btn btn-primary' %>
   <% end %>
   <%= render "devise/shared/links" %>

@@ -32,16 +32,19 @@
                         <a href="#page-top"></a>
                     </li>
                     <%if current_user %>
-                        <li>
-                        <%= link_to('log out', destroy_user_session_path, method: :delete)%>
+                         <li>
+                        <%= link_to('Home', root_path)%>
                         </li>
                         <li>
                         <%= link_to('Dashboard', dash_path)%>
                         </li>
                         <li>
-                        <%= link_to('Home', root_path)%>
+                        <%= link_to('log out', destroy_user_session_path, method: :delete)%>
                         </li>
-                    <%else %>
+                        <%else %>
+                        <li>
+                        <%= link_to('log in',  new_user_session_path)%>
+                        </li>
                         <li>
                         <a class="page-scroll" href="#about">About</a>
                         </li>

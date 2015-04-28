@@ -23,7 +23,9 @@ body {
     color: #EFAD27;
     background-color: #C7D84E;
 }
-
+.business-signup {
+    display: none; 
+}
 html {
     width: 100%;
     height: 100%;
@@ -80,6 +82,7 @@ a:focus {
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #000;
     font-weight: 700;
+    margin-bottom: 20px;
 }
 
 .navbar-custom .navbar-brand:focus {
