@@ -79,9 +79,6 @@ a:focus {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #000;
-}
-
-.navbar-custom .navbar-brand {
     font-weight: 700;
 }
 
@@ -112,7 +109,8 @@ a:focus {
 
 .navbar-custom .nav li a:hover {
     outline: 0;
-    color: rgba(255,255,255,.8);
+    color: black;
+    // color: rgba(255,255,255,.8);
     background-color: transparent;
 }
 
