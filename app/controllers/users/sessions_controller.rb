@@ -30,15 +30,3 @@ class Users::SessionsController < Devise::SessionsController
 end
 
 
- before_filter :configure_permitted_parameters
-
-
-
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u|
-      u.permit(:email, :password, :password_confirmation, :business_attributes => :fullname)
-    }
-  end
-end

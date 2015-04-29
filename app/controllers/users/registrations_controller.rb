@@ -9,20 +9,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # def new
-  #   # Override Devise default behaviour and create a profile as well
-  #   # build_resource({})
-  #   # resource.build_business
-  #   # respond_with self.resource
-  # end
+  def create
+    business = Business.create business_params if params[:user][:business]
+    params[:user][:business_id] = business.id if business
+    params[:user].delete :business if params[:user][:business]
+    super  
+  end
 
 
 protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u|
-      u.permit(:email, :password, :password_confirmation, :full_name, :age, :neighborhood, :transportation, :business_attributes => [:name, :description, :address, :typeofbusiness])
+      u.permit(:email, :password, :password_confirmation, :full_name, :age, :neighborhood, :transportation, :business_id)
     }
+  end
+
+private
+
+  def business_params
+    params[:user].require(:business).permit(:name, :description, :address, :typeofbusiness)
   end
 
   # POST /resource
@@ -67,9 +73,9 @@ protected
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    dash_path
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

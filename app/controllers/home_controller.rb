@@ -6,5 +6,7 @@ before_action :authenticate_user!, only: :userdash
 
 	def userdash
 	end
-	
+	 
+	def businessdash
+	end
 end

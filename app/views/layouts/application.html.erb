@@ -16,8 +16,14 @@
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">
                     <i class="fa fa-play-circle"></i>  <span class="light">Responsible</span> 
-                <%if current_user %>    
-                <%= current_user.full_name %>
+                <%if current_user %>  
+                 <%if current_user.business %>   
+                    <%= current_user.business.name %>
+                    <% elsif current_user.full_name.present? %>
+                    <%= current_user.full_name %>
+                    <% else %>
+                    you
+                     <% end %> 
                 <%else %>
                 us
                 <%end%>
@@ -34,6 +40,9 @@
                     <%if current_user %>
                          <li>
                         <%= link_to('Home', root_path)%>
+                        </li>
+                        <li>
+                        <%= link_to('Business Dashboard', business_path) if current_user.business%>
                         </li>
                         <li>
                         <%= link_to('Dashboard', dash_path)%>
