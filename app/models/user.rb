@@ -3,7 +3,11 @@ class User < ActiveRecord::Base
   # this refers to clientele
   has_many :businesses, through: :customerships 
   # this refers to ownership 
-  belongs_to :business 
+  belongs_to :business
+
+  # has many events 
+  has_many :events 
+  has_many :confirmed_events, through: :events, class_name: 'Business', source: :business
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

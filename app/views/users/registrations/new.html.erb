@@ -13,15 +13,17 @@
   <%= f.select :neighborhood, options_for_select(%w[Brickell Coral_Gables Miami_Beach Wynwood]) %>
     <%= f.email_field :email, :placeholder => 'Email address' %>
     <%= f.password_field :password, :placeholder => 'Password' %>
-    <%= f.password_field :password_confirmation, :placeholder => 'Password confirmation' %>
+    <%= f.password_field :password_confirmation, :placeholder => 'Password confirmation' %><br><br>
   <div class="business-signup">
     <%= f.fields_for :business do |business_fields| %>
         <%= business_fields.label :business_name %>
-        <%= business_fields.text_field :name%>
-         <%= business_fields.label :business_description %>
-        <%= business_fields.text_field :description%>
-         <%= business_fields.label :typeofbusiness %>
-        <%= business_fields.text_field :typeofbusiness %>
+        <%= business_fields.text_field :name, :placeholder => 'Chris hippy cupcakes'%>
+        <%= business_fields.label :address %><br>
+        <%= business_fields.text_area :address, cols: 27, rows: 2, :placeholder => 'e.g. 1200 ne 2 ct, Miami FL 33137'%>
+         <%= business_fields.label :business_description %><br>
+        <%= business_fields.text_area :description, cols: 27, rows: 5, :placeholder => 'we serve bombass cupcakes!'%>
+         <%= business_fields.label :type_of_business %>
+        <%= business_fields.select :typeofbusiness, options_for_select(%w[Bar Retail Restaurant Store]) %>
       <% end %>
   </div>
     <%= f.submit "Sign up",:class=>'btn btn-primary' %>
