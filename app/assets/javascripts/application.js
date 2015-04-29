@@ -14,8 +14,9 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require_tree .
+//= require fullcalendar
 
 $('.business-click').on('click', function(event) {
 	event.preventDefault();
-	$('.business-signup').show();
+	$('.business-signup').toggle();
 });

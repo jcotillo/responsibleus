@@ -17,7 +17,7 @@
                 <a class="navbar-brand page-scroll" href="#page-top">
                     <i class="fa fa-play-circle"></i>  <span class="light">Responsible</span> 
                 <%if current_user %>  
-                 <%if current_user.business %>   
+                    <%if current_user.business %>   
                     <%= current_user.business.name %>
                     <% elsif current_user.full_name.present? %>
                     <%= current_user.full_name %>
@@ -50,7 +50,14 @@
                         <li>
                         <%= link_to('log out', destroy_user_session_path, method: :delete)%>
                         </li>
-                        <%else %>
+                    <%elsif current_user.nil? &&  current_page?(new_user_session_path) %>
+                        <li>
+                        <%= link_to('log in',  new_user_session_path)%>
+                        </li>
+                        <li>
+                        <%= link_to('Home', root_path)%>
+                        </li>
+                    <%else %>
                         <li>
                         <%= link_to('log in',  new_user_session_path)%>
                         </li>
