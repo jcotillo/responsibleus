@@ -389,7 +389,10 @@ body {
     color: #9C9290;
 }
 /* User sign in and sign forms. */
-.border-form-div {
+.windpower {
+  background-image: asset_url('wind_power.jpg');
+}
+.border-form-div { 
   max-width: 300px;
   padding: 19px 29px 29px;
   margin: 40px auto 20px;

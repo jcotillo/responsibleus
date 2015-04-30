@@ -14,9 +14,24 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require_tree .
+//= require moment
 //= require fullcalendar
 
 $('.business-click').on('click', function(event) {
 	event.preventDefault();
 	$('.business-signup').toggle();
+});
+
+$(document).ready(function() {
+	if ($('body').data('userpage') =='true') {
+		console.log('hi');
+       $('body').addClass('windpower');
+    }
+        
+    // page is now ready, initialize the calendar...
+
+    $('#calendar').fullCalendar({
+       
+    })
+
 });
