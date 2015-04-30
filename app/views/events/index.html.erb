@@ -1,8 +1,12 @@
-<h1>Events#index</h1>
 <div class="container">
-  <div class="row">
-  	<div class="col-lg-6"></div>	
-    <div class="col-lg-6">
+  <div class="userdash row">
+  	<div class="col-lg-6">
+	  	<div class="userdashback userleft row">profile pic/ user stats</div>
+		<div class="userdashback userleft row">coupons/offers for nearby registered businesses</div>
+		<div class="userdashback userleft row">friends "top 8"</div>
+	</div>
+    <div class="col-lg-6 userdashback userright">
+    <%= link_to("add new event", events_new_path)%>
 		<div id='calendar'></div>
 	</div>
   </div>

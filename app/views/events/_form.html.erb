@@ -1,7 +1,4 @@
-<h1>Events#new</h1>
-<p>Find me in app/views/events/new.html.erb</p>
-
-<% form_for @event do |f| %>
+<%= form_for(@event) do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
 

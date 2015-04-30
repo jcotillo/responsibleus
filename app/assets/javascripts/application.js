@@ -23,15 +23,20 @@ $('.business-click').on('click', function(event) {
 });
 
 $(document).ready(function() {
-	if ($('body').data('userpage') =='true') {
-		console.log('hi');
+
+	var page = $("body").data("userpage");
+	if (page =='new') {
        $('body').addClass('windpower');
     }
-        
+    if (page =='index') {
+       $('nav').removeClass('navbar-fixed-top');
+    }   
     // page is now ready, initialize the calendar...
-
+    $('nav').addClass('navbar-fixed-top');
     $('#calendar').fullCalendar({
-       
+        dayClick: function() {
+      alert('a day has been clicked!');
+         }
     })
 
 });
