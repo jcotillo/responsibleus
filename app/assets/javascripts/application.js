@@ -23,25 +23,64 @@ $('.business-click').on('click', function(event) {
 });
 
 $(document).ready(function() {
+     var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
 
-    $('#calendar').fullCalendar({
-    eventSources: [
-        // your event source
-        {
-            url: '/events.json', // use the `url` property
-            color: 'yellow',    // an option!
-            textColor: 'black'  // an option!
-        }
-     ]
-    editable: true
-    //          // any other sources...
-    // dayClick: function(date) {
-    //    $('.date').text(date.format("MMM Do YYYY"));
-    //    $('.eventdate').text("event on" + date.format() + "starts");
-    //    $('.js-modal').modal();
-    //    // $('.eventsubmit').on('click', function () {
+    var calendar = $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'm',
+            right: 'agendaMonth,agendaWeek,agendaDay'
+        },
+        selectable: true,
+        selectHelper: true,
+        allDayDefault: false,
+        allDaySlot: false,
+        firstHour: 9,
 
-    //    // });
+        dayClick: function(date, allDay, jsEvent, view) {
+            // calendar.fullCalendar('gotoDate', date);
+             $('.date').text(date.format("MMM Do YYYY"));
+             $('.eventdate').text("event on" + date.format() + "starts");
+             $('.js-modal').modal();
+        },
 
-    }
+
+        select: function(start, end) {
+
+            // var title = prompt('Event Title:');
+            if (title) {
+                calendar.fullCalendar('renderEvent',
+                    {
+                        title: title,
+                        start: start,
+                        end: end
+                    },
+                    false // make the event "stick"
+                );
+
+                var startDateString = $.fullCalendar.formatDate(start, 'yyyy-MM-dd hh:mm');
+                var endDateString = $.fullCalendar.formatDate(end, 'yyyy-MM-dd hh:mm');
+                $.ajax({
+                    type: 'POST',
+                    url: '{url}ajaxpost/add',
+                    data: {
+                        startDate: startDateString,
+                        endDate: endDateString,
+                        eventTitle: title                            
+                    },
+                    dateType: 'json',
+                    success: function (resp) {
+                        calendar.fullCalendar('refetchEvents');
+
+                    }
+                });
+            }
+            calendar.fullCalendar('unselect');
+        },
+        editable: true,
+        events: "/events.json",
+    });
 });

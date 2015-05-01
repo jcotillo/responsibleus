@@ -34,7 +34,8 @@
 
 		  <%= f.label :ends_at %>
 		  <%= f.datetime_select :end, class: "eventsubmit" %><br>
-
+		  <%=f.label :How_are_you_getting_there? %><br>
+   		  <%= f.select :transportationschoice, options_for_select(%w[Bicycle Bus/Train Car]) %><br>
 		  <%= f.submit %>
 		<% end %>
 	    </div>

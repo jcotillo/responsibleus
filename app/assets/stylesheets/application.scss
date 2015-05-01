@@ -391,7 +391,9 @@ body {
 /* User sign in and sign forms. */
 .page-new {
   background-image: asset_url('wind_power.jpg');
-  background-repeat: no-repeat;
+  // background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 100% 100%; 
 }
 .border-form-div { 
   max-width: 300px;

@@ -15,6 +15,7 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.new event_params
+    @event.business_id = current_user.business_id if current_user.business
     if @event.save
       render :json => @event, :status => :created, :location => @event
     else
