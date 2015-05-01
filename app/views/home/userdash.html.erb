@@ -43,7 +43,7 @@
 			<h1 class="date"></h1>
 	    </div>
 	    <div class="modal-body">
-	      <%= form_for(@event) do |f| %>
+	      <%= form_for(@event, remote: true) do |f| %>
 		  <%= f.label :title%>
 		  <%= f.text_field :title, class: "eventtitle" %><br>
 

@@ -17,12 +17,7 @@ class EventsController < ApplicationController
     @event = current_user.events.new event_params
     @event.business_id = current_user.business_id if current_user.business
     @event.save!
-    render nothing: true
-    # if @event.save
-    #   render :json => @event, :status => :created, :location => @event
-    # else
-    #   # flash.message errors
-    # end
+    render :json => @event
   end
 
   # GET /events/1/edit

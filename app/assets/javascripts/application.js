@@ -39,13 +39,38 @@ $(document).ready(function() {
              $('.date').text(date.format("MMM Do YYYY"));
              $('.eventdate').text("event on" + date.format() + "starts");
              $('.js-modal').modal();
+            var start = $('.date').val();
+            var title = $('.eventtitle').val();
+            var description =  $('.eventdescription').val();
+            var end =  $('.eventend').val();
+            var transportation =  $('.transportation').val();
+
+
+          $('.eventsubmit').on('click', function () {
+             $.ajax({
+                    type: 'POST',
+                    url: '/events.json',
+                    data: {
+                        title: title,
+                        description: description,
+                        start: start,
+                        end: end,
+                        transportation: transportation                            
+                    },
+                    dateType: 'json',
+                    success: function (resp) {
+                        calendar.fullCalendar('refetchEvents');
+
+                    }
+                });
+           });
         },
 
        eventClick: function(calEvent, jsEvent, view) {
        var eventinfo = calEvent.title
         var html = [
           '<h2>description:</h2>' + calEvent.description, 
-           '<h2>start:</h2>' + calEvent.start ,
+           '<h2>start:</h2>' + calEvent.start,
       ].join('');
         $('.eventtitle').text(eventinfo);
         $('.eventdets').html(html);
