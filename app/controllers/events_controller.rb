@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
 
   def index
+  @events = Event.where(user_id: current_user.id)
+  render :json => @events
   end
 
   def new
@@ -12,17 +14,12 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(params[:event])
-    @event.save
-    # respond_to do |format|
-    #   if @event.save
-    #     format.html { redirect_to @event, :notice => 'Event was successfully created.' }
-    #     format.json { render :json => @event, :status => :created, :location => @event }
-    #   else
-    #     format.html { render :action => "new" }
-    #     format.json { render :json => @event.errors}
-    #   end
-    # end
+    @event = current_user.events.new event_params
+    if @event.save
+      render :json => @event, :status => :created, :location => @event
+    else
+      # flash.message errors
+    end
   end
 
   # GET /events/1/edit
@@ -57,4 +54,10 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  private
+
+  def event_params
+    params.require(:event).permit(:title, :description, :start, :end)
+  end
+
 end

@@ -389,8 +389,9 @@ body {
     color: #9C9290;
 }
 /* User sign in and sign forms. */
-.windpower {
+.page-new {
   background-image: asset_url('wind_power.jpg');
+  background-repeat: no-repeat;
 }
 .border-form-div { 
   max-width: 300px;
