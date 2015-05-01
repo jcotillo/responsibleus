@@ -29,57 +29,72 @@ $(document).ready(function() {
     var y = date.getFullYear();
 
     var calendar = $('#calendar').fullCalendar({
-        header: {
-            left: 'prev,next today',
-            center: 'm',
-            right: 'agendaMonth,agendaWeek,agendaDay'
-        },
         selectable: true,
         selectHelper: true,
         allDayDefault: false,
         allDaySlot: false,
-        firstHour: 9,
+        firstHour: 6,
 
-        dayClick: function(date, allDay, jsEvent, view) {
-            // calendar.fullCalendar('gotoDate', date);
+      dayClick: function(date, allDay, jsEvent, view) {
              $('.date').text(date.format("MMM Do YYYY"));
              $('.eventdate').text("event on" + date.format() + "starts");
              $('.js-modal').modal();
         },
 
+       eventClick: function(calEvent, jsEvent, view) {
+       var eventinfo = calEvent.title
+        var html = [
+          '<h2>description:</h2>' + calEvent.description, 
+           '<h2>start:</h2>' + calEvent.start ,
+      ].join('');
+        $('.eventtitle').text(eventinfo);
+        $('.eventdets').html(html);
+        $('.eventsconfirmed').modal();
+  
 
-        select: function(start, end) {
+      },
+        // select: function(start, view, JsEvent) {
 
-            // var title = prompt('Event Title:');
-            if (title) {
-                calendar.fullCalendar('renderEvent',
-                    {
-                        title: title,
-                        start: start,
-                        end: end
-                    },
-                    false // make the event "stick"
-                );
+        //     if (view) {
+        //         calendar.fullCalendar('renderEvent',
+        //             {
+        //                 title: title,
+        //                 description: description,
+        //                 start: start,
+        //                 end: end,
+        //                 transportation: transportation
+        //             },
+        //             false // make the event "stick"
+        //         );
 
-                var startDateString = $.fullCalendar.formatDate(start, 'yyyy-MM-dd hh:mm');
-                var endDateString = $.fullCalendar.formatDate(end, 'yyyy-MM-dd hh:mm');
-                $.ajax({
-                    type: 'POST',
-                    url: '{url}ajaxpost/add',
-                    data: {
-                        startDate: startDateString,
-                        endDate: endDateString,
-                        eventTitle: title                            
-                    },
-                    dateType: 'json',
-                    success: function (resp) {
-                        calendar.fullCalendar('refetchEvents');
+        //     var title = $('.eventtitle').val();
+        //     var description =  $('.eventdescription').val();
+        //     var end =  $('.eventend').val();
+        //     var transportation =  $('.transportation').val();
 
-                    }
-                });
-            }
-            calendar.fullCalendar('unselect');
-        },
+
+        //   $('.eventsubmit').on('click', function () {
+        //      $.ajax({
+        //             type: 'POST',
+        //             url: '/events.json',
+        //             data: {
+        //                 title: title,
+        //                 description: description,
+        //                 startDate: start,
+        //                 endDate: end,
+        //                 transportation: transportation                            
+        //             },
+        //             dateType: 'json',
+        //             success: function (resp) {
+        //                 calendar.fullCalendar('refetchEvents');
+
+        //             }
+        //         });
+        //   })
+               
+        //     }
+        //     calendar.fullCalendar('unselect');
+        // },
         editable: true,
         events: "/events.json",
     });

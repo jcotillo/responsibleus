@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'carrierwave'
 gem 'momentjs-rails'
 gem 'fullcalendar-rails'
 gem 'devise'
