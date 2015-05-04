@@ -15,7 +15,10 @@
 //= require bootstrap-sprockets
 //= require_tree .
 //= require moment
+//= require jquery.purr
+//= require best_in_place
 //= require fullcalendar
+
 
 $('.business-click').on('click', function(event) {
 	event.preventDefault();
@@ -23,10 +26,6 @@ $('.business-click').on('click', function(event) {
 });
 
 $(document).ready(function() {
-     var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
 
     var calendar = $('#calendar').fullCalendar({
         selectable: true,
@@ -47,6 +46,7 @@ $(document).ready(function() {
 
 
           $('.eventsubmit').on('click', function () {
+            
              $.ajax({
                     type: 'POST',
                     url: '/events.json',
@@ -60,66 +60,36 @@ $(document).ready(function() {
                     dateType: 'json',
                     success: function (resp) {
                         calendar.fullCalendar('refetchEvents');
-
-                    }
+                        $('.js-modal').modal('hide');
+                      },
+                    error: function (resp) {
+                        console.log(resp);
+                      }
                 });
            });
         },
 
        eventClick: function(calEvent, jsEvent, view) {
-       var eventinfo = calEvent.title
+       var eventtitle = calEvent.title
         var html = [
           '<h2>description:</h2>' + calEvent.description, 
            '<h2>start:</h2>' + calEvent.start,
+           '<h2>end:</h2>' + calEvent.end,
+           '<h2>transportation choice:</h2>' + calEvent.transportationchoice,
+           '<br><a href="#eventedit" class="eventedit">edit this event</a>',
       ].join('');
-        $('.eventtitle').text(eventinfo);
+        $('.eventtitle').text(eventtitle);
         $('.eventdets').html(html);
         $('.eventsconfirmed').modal();
-  
+
+        $('.eventedit').on('click',function () {
+            event.preventDefault;
+            var form = $('.modal-body').clone(); 
+            $('.eventdets').html(form);
+        })
 
       },
-        // select: function(start, view, JsEvent) {
-
-        //     if (view) {
-        //         calendar.fullCalendar('renderEvent',
-        //             {
-        //                 title: title,
-        //                 description: description,
-        //                 start: start,
-        //                 end: end,
-        //                 transportation: transportation
-        //             },
-        //             false // make the event "stick"
-        //         );
-
-        //     var title = $('.eventtitle').val();
-        //     var description =  $('.eventdescription').val();
-        //     var end =  $('.eventend').val();
-        //     var transportation =  $('.transportation').val();
-
-
-        //   $('.eventsubmit').on('click', function () {
-        //      $.ajax({
-        //             type: 'POST',
-        //             url: '/events.json',
-        //             data: {
-        //                 title: title,
-        //                 description: description,
-        //                 startDate: start,
-        //                 endDate: end,
-        //                 transportation: transportation                            
-        //             },
-        //             dateType: 'json',
-        //             success: function (resp) {
-        //                 calendar.fullCalendar('refetchEvents');
-
-        //             }
-        //         });
-        //   })
-               
-        //     }
-        //     calendar.fullCalendar('unselect');
-        // },
+        timeFormat: 'h(:mm)',
         editable: true,
         events: "/events.json",
     });

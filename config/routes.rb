@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
 
-  resources :events
 
-  devise_for :users, controllers: {registrations: 'users/registrations'}
+devise_for :users, controllers: {registrations: 'users/registrations'}, :path => 'accounts'
+
+resources :users do
+    resources :coupons
+  	resources :events
+end
+
+
+
+
   root to: "home#index"
   get '/dash' => 'home#userdash'
   get '/business' => 'home#businessdash'

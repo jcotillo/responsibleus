@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
 
+#gem for in place editing
+gem 'best_in_place'
+#for profile pic 
 gem 'carrierwave'
+#for fullcalendar js
 gem 'momentjs-rails'
 gem 'fullcalendar-rails'
 gem 'devise'
