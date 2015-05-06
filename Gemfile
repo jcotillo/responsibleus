@@ -1,5 +1,12 @@
 source 'https://rubygems.org'
 
+#for business dash
+gem 'jquery-ui-rails' 
+gem 'google-api-client', :require => 'google/api_client'
+gem 'omniauth'
+gem "omniauth-google-oauth2", "~> 0.2.1" 
+#this is for coffee script for windows
+gem 'coffee-script-source', '1.8.0'
 #gem for in place editing
 gem 'best_in_place'
 #for profile pic 

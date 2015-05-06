@@ -18,7 +18,7 @@
 //= require jquery.purr
 //= require best_in_place
 //= require fullcalendar
-
+//= require jquery-ui
 
 $('.business-click').on('click', function(event) {
 	event.preventDefault();
@@ -26,7 +26,8 @@ $('.business-click').on('click', function(event) {
 });
 
 $(document).ready(function() {
-
+    $( "#accordion" ).accordion();
+    
     var calendar = $('#calendar').fullCalendar({
         selectable: true,
         selectHelper: true,

@@ -1,4 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
+
+
 # before_filter :configure_sign_in_params, only: [:create]
 
   # GET /users/sign_up
