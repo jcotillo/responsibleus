@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+ 
+gem 'rails_12factor', group: :production
 #for business dash
 gem 'jquery-ui-rails' 
 gem 'google-api-client', :require => 'google/api_client'

@@ -9,3 +9,13 @@
 .businessdetails {
 	text-align: center;
 }
+.background-imageforest {
+  background-image: image-url('forest.jpg');
+  background-size: cover;
+  height: 100%;
+  left: 0;
+  right: 0;
+}
+.seethrough {
+	opacity: 0.65;
+}

@@ -36,38 +36,11 @@ $(document).ready(function() {
         firstHour: 6,
 
       dayClick: function(date, allDay, jsEvent, view) {
+             $('#event_end_3i > option[value="'+ date.format("D") +'"]').attr('selected','selected');
+             $('#event_start_3i > option[value="'+ date.format("D") +'"]').attr('selected','selected');
              $('.date').text(date.format("MMM Do YYYY"));
              $('.eventdate').text("event on" + date.format() + "starts");
              $('.js-modal').modal();
-            var start = $('.date').val();
-            var title = $('.eventtitle').val();
-            var description =  $('.eventdescription').val();
-            var end =  $('.eventend').val();
-            var transportation =  $('.transportation').val();
-
-
-          $('.eventsubmit').on('click', function () {
-            
-             $.ajax({
-                    type: 'POST',
-                    url: '/events.json',
-                    data: {
-                        title: title,
-                        description: description,
-                        start: start,
-                        end: end,
-                        transportation: transportation                            
-                    },
-                    dateType: 'json',
-                    success: function (resp) {
-                        calendar.fullCalendar('refetchEvents');
-                        $('.js-modal').modal('hide');
-                      },
-                    error: function (resp) {
-                        console.log(resp);
-                      }
-                });
-           });
         },
 
        eventClick: function(calEvent, jsEvent, view) {
@@ -94,4 +67,36 @@ $(document).ready(function() {
         editable: true,
         events: "/events.json",
     });
+    $('.eventsubmit').on('click', function () {
+            var start = $('.eventstart').val();
+            var title = $('.eventtitle').val();
+            var description =  $('.eventdescription').val();
+            var end =  $('.eventend').val();
+            var transportation =  $('.transportation').val();
+            var publicmaybe = $('.private').val();
+
+             $.ajax({
+                    type: 'POST',
+                    url: '/events.json',
+                    data: {
+                        title: title,
+                        description: description,
+                        start: start,
+                        end: end,
+                        transportation: transportation,
+                        'private': publicmaybe                           
+                    },
+                    dateType: 'json',
+                    success: function (event) {
+                      console.log(event);
+                      $('#calendar').fullCalendar( 'renderEvent', event);
+                      },
+                    error: function (resp) {
+                        console.log(resp);
+                      }
+                $('#calendar').fullCalendar( 'renderEvent', event);
+                });
+            $('.js-modal').modal('hide');
+            $('#calendar').fullCalendar( 'refetchEvents' );
+           });
 });
