@@ -3,11 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .userdashback {
-	background-color: #3DCCA5;
+	background-color: #61988E;
 }
 .userdash {
 	margin-top: 75px;
-	color: black;
+	color: #D8D4F2;
 }
 .userleft {
 	height: 120px;
@@ -19,4 +19,13 @@
 }
 .eventform {
 	margin: auto;
+}
+.transbox {
+    margin: 30px;
+    // background-color: #ffffff;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+#calendar {
+	 z-index: 9999;
+	 color:black;
 }

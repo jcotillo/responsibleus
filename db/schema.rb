@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507000759) do
+ActiveRecord::Schema.define(version: 20150507185807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20150507000759) do
   create_table "businesses", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.text     "address"
+    t.text     "zipcode"
     t.string   "typeofbusiness"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -32,7 +32,18 @@ ActiveRecord::Schema.define(version: 20150507000759) do
     t.integer  "business_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "expiration"
   end
+
+  create_table "coupons_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "coupon_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "coupons_users", ["coupon_id"], name: "index_coupons_users_on_coupon_id", using: :btree
+  add_index "coupons_users", ["user_id"], name: "index_coupons_users_on_user_id", using: :btree
 
   create_table "customerships", force: :cascade do |t|
     t.integer  "business_id"
@@ -76,7 +87,7 @@ ActiveRecord::Schema.define(version: 20150507000759) do
     t.datetime "updated_at"
     t.text     "full_name"
     t.integer  "age"
-    t.text     "neighborhood"
+    t.text     "zipcode"
     t.text     "transportation"
     t.integer  "business_id"
     t.string   "profilepic"

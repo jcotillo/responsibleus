@@ -8,9 +8,9 @@
     <%=f.label :age %>
    	<%= f.number_field :age, :placeholder => 'AGE', in: 18..75 %><br>
    	<%=f.label :transportation %>
-   	<%= f.select :transportation, options_for_select(%w[Bicycle Bus/Train Car]) %>
-   	<%=f.label :neighborhood %>
-	<%= f.select :neighborhood, options_for_select(%w[Brickell Coral_Gables Miami_Beach Wynwood]) %>
+   	<%= f.select :transportation, options_for_select(%w[Bicycle Bus/Train Carpool Car-alone]) %>
+   	<%=f.label :zipcode %>
+	  <%= f.text_field :zipcode %>
     <%= f.email_field :email, :placeholder => 'Email address' %>
     <%= f.password_field :password, :placeholder => 'Password' %>
     <%= f.password_field :password_confirmation, :placeholder => 'Password confirmation' %>
@@ -20,6 +20,8 @@
         <%= business_fields.text_field :name%>
          <%= business_fields.label :description %>
         <%= business_fields.text_field :description%>
+         <%= business_fields.label :zipcode %>
+        <%= business_fields.text_field :zipcode %>
          <%= business_fields.label :typeofbusiness %>
         <%= business_fields.text_field :typeofbusiness %>
       <% end %>

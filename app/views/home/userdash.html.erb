@@ -19,15 +19,17 @@
 		  		why no name?
 		  		<% end %><br>
 		  		<strong>Age:</strong><%= current_user.age %><br>
-		  		<strong>Neighborhood:</strong><%= current_user.neighborhood %><br>
+		  		<strong>Zipcode:</strong><%= current_user.zipcode %><br>
 		  		<strong>Choice of transportation:</strong><%= current_user.transportation %><br>
 		  		</div>
 		  	</div>
-			<div class="userdashback userleft row"><%= @count %></div>
+			<div class="userdashback userleft row"><h1>Environment status:<%= @count %></h1></div>
 			<div class="userdashback userleft row">friends "top 8"</div>
 		</div>
 	    <div class="col-lg-6 userright">
-			<div id='calendar'></div>
+			<div class="transbox">
+				<div id='calendar'></div>
+			</div>
 		</div>
 	  </div>
 
@@ -38,22 +40,23 @@
 			    <div class="modal-header">
 			      <!-- Close button -->
 			      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			        <span>&times;</span>
+			        <span class="modal-close">&times;</span>
 			      </button>
 					<h1 class="date"></h1>
 			    </div>
 			    <div class="modal-body">
-			      <%= form_for([@event], remote: true) do |f| %>
-				  <%= f.label :title%>
+			      <%= form_for(@event, remote: true) do |f| %>
+				  <%= f.label :title%><br>
 				  <%= f.text_field :title, class: "eventtitle" %><br>
 
-				  <%= f.label :description %>
+			    	 
+				  <%= f.label :description %><br>
 				  <%= f.text_field :description, class: "eventdescription" %><br>
 
 				  <%= f.label :starts_at, class: "eventdate" %><br>
 				  <%= f.datetime_select :start, class: "eventtime" %><br>
 
-				  <%= f.label :ends_at %>
+				  <%= f.label :ends_at %><br>
 				  <%= f.datetime_select :end, class: "eventend" %><br>
 				  <%=f.label :method_of_transportation %><br>
 		   		  <%= f.select :transportationschoice, options_for_select(%w[Bicycle Bus/Train Car], class: "transportation" ) %><br>
@@ -75,11 +78,11 @@
 				    <div class="modal-header">
 				      <!-- Close button -->
 				      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				        <span>&times;</span>
+				        <span class="modal-close">&times;</span>
 				      </button>
 						<span class="eventtitle"></span>
 				    </div>
-			    	<div class="modal-body eventdets"></div>
+			    	<div class="modal-body eventdets">
 			  </div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->

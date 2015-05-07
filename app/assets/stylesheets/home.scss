@@ -19,3 +19,28 @@
 .seethrough {
 	opacity: 0.65;
 }
+.modal-header {
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+.modal-body { 
+	color: black; 
+	text-align: center;
+}
+.modal-close {
+	color: white;  
+}
+.modal-footer {
+  display: inline-block;
+  min-width: 100%;
+
+  #hidden-delete {
+    float: left;
+  }
+
+  .submit-right {
+    float: right;
+  }
+}
