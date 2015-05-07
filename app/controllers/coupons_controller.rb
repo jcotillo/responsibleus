@@ -25,10 +25,10 @@ class CouponsController < ApplicationController
   # POST /coupons.json
   def create
     @coupon = Coupon.new(coupon_params)
-
+    @coupon.business_id = current_user.business.id
     respond_to do |format|
       if @coupon.save
-        format.html { redirect_to @coupon, notice: 'Coupon was successfully created.' }
+        format.html { redirect_to '/business', notice: 'Coupon was successfully created.' }
         format.json { render :show, status: :created, location: @coupon }
       else
         format.html { render :new }

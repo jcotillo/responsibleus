@@ -29,18 +29,28 @@ $(document).ready(function() {
     $( "#accordion" ).accordion();
     
     var calendar = $('#calendar').fullCalendar({
+        events: "/events.json",
         selectable: true,
         selectHelper: true,
         allDayDefault: false,
         allDaySlot: false,
         firstHour: 6,
-
+      //   if (eventData.start < todayDate){
+      //   alert('You cant choose a date that already past.');
+      //   $("#calendar").fullCalendar("unselect");
+      //   return
+      // },
       dayClick: function(date, allDay, jsEvent, view) {
              $('#event_end_3i > option[value="'+ date.format("D") +'"]').attr('selected','selected');
              $('#event_start_3i > option[value="'+ date.format("D") +'"]').attr('selected','selected');
              $('.date').text(date.format("MMM Do YYYY"));
              $('.eventdate').text("event on" + date.format() + "starts");
              $('.js-modal').modal();
+             var today = Date.today;
+           if (date < today){
+              alert('You cant choose a date that already past.');
+              $("#calendar").fullCalendar("unselect");        
+            }
         },
 
        eventClick: function(calEvent, jsEvent, view) {
@@ -64,8 +74,7 @@ $(document).ready(function() {
 
       },
         timeFormat: 'h(:mm)',
-        editable: true,
-        events: "/events.json",
+        editable: true, 
     });
     $('.eventsubmit').on('click', function () {
             var start = $('.eventstart').val();
@@ -88,15 +97,14 @@ $(document).ready(function() {
                     },
                     dateType: 'json',
                     success: function (event) {
-                      console.log(event);
-                      $('#calendar').fullCalendar( 'renderEvent', event);
+                      alert(json.msg);
+                      $("#calendar").fullCalendar("renderEvent", eventData, true);
+                      $("#calendar").fullCalendar("refetchEvents");
                       },
                     error: function (resp) {
                         console.log(resp);
                       }
-                $('#calendar').fullCalendar( 'renderEvent', event);
                 });
             $('.js-modal').modal('hide');
-            $('#calendar').fullCalendar( 'refetchEvents' );
            });
 });
