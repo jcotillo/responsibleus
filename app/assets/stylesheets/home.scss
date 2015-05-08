@@ -16,9 +16,7 @@
   left: 0;
   right: 0;
 }
-.seethrough {
-	opacity: 0.65;
-}
+
 .modal-header {
   background-color: black;
   color: white;
@@ -43,4 +41,15 @@
   .submit-right {
     float: right;
   }
+}
+.calendarback {
+ background-color: rgba(97, 152, 142, 1);
+  z-index: 2;
+}
+.businessdash {
+  background-image: image-url('pink.jpg');
+  background-size: cover;
+  height: 100%;
+  left: 0;
+  right: 0;
 }

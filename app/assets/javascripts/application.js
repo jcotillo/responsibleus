@@ -27,6 +27,12 @@ $('.business-click').on('click', function(event) {
 });
 
 $(document).ready(function() {
+
+  // if $('body').hasClass("page-businessdash") {
+  //   $('.navbar-custom a').css("color", "black");
+  //   $('.a:visited').css("color", "black");
+  // }
+
     $( "#accordion" ).accordion();
     
     var calendar = $('#calendar').fullCalendar({

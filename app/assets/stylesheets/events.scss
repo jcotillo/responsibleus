@@ -22,8 +22,10 @@
 }
 .transbox {
     margin: 30px;
-    // background-color: #ffffff;
-    filter: alpha(opacity=60); /* For IE8 and earlier */
+    background-color: rgba(97, 152, 142, 1) !important;
+    // opacity:1 !important;
+    z-index: 10000;
+    // filter: alpha(opacity=60); /* For IE8 and earlier */
 }
 #calendar {
 	 z-index: 9999;
