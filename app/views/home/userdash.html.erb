@@ -1,7 +1,7 @@
 <div class="background-imageforest container-fluid">
 	  <div class="userdash row">
 	  	<div class="col-lg-6">
-		  	<div class="userdashback userleft row">
+		  	<div class="userleft row">
 		  		<div class="col-lg-6">
 		  		<img class="profilepic" src="
 		  		<% if current_user.profilepic %>
@@ -10,9 +10,8 @@
 		  		<%= image_url("babydefault.png") %>
 		  		<% end %>">
 		  		 <br>
-		  		<%= link_to("edit", edit_user_registration_path) %>
 		  		</div>
-		  		<div class="col-lg-6 userdetails">
+		  		<div class="userdashback col-lg-6 userdetails">
 		  		<strong>Name:</strong><% if current_user.full_name %>
 		  		<%= current_user.full_name %>
 		  		<% else %>
@@ -21,10 +20,10 @@
 		  		<strong>Age:</strong><%= current_user.age %><br>
 		  		<strong>Zipcode:</strong><%= current_user.zipcode %><br>
 		  		<strong>Choice of transportation:</strong><%= current_user.transportation %><br>
+		  		<%= link_to("edit", edit_user_registration_path) %>
 		  		</div>
 		  	</div>
-			<div class="userdashback userleft row"><h1>Environment status:<%= @count %></h1></div>
-			<div class="userdashback userleft row">friends "top 8"</div>
+			<div class="userdashback userleft row usercoupons"><h1>Environment status:<%= @count %></h1></div>
 		</div>
 	    <div class="col-lg-6 calendarback userright">
 			<div class="transbox">
@@ -45,7 +44,7 @@
 					<h1 class="date"></h1>
 			    </div>
 			    <div class="modal-body">
-			      <%= form_for(@event, remote: true) do |f| %>
+			      <%= form_for(@event, remote: true, html: {class: "eventform"}) do |f| %>
 				  <%= f.label :title%><br>
 				  <%= f.text_field :title, class: "eventtitle" %><br>
 
@@ -54,10 +53,9 @@
 				  <%= f.text_field :description, class: "eventdescription" %><br>
 
 				  <%= f.label :starts_at, class: "eventdate" %><br>
-				  <%= f.datetime_select :start, class: "eventtime" %><br>
-
+				  <%= f.datetime_select :start, class: "eventtime", order: [ :month,:day, :year], ampm: true %><br>
 				  <%= f.label :ends_at %><br>
-				  <%= f.datetime_select :end, class: "eventend" %><br>
+				  <%= f.datetime_select :end, class: "eventend", order: [ :month, :day, :year], ampm: true %><br>
 				  <%=f.label :method_of_transportation %><br>
 		   		  <%= f.select :transportationschoice, options_for_select(%w[Bicycle Bus/Train Car], class: "transportation" ) %><br>
 				  <% if current_user.business %>
@@ -80,9 +78,10 @@
 				      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				        <span class="modal-close">&times;</span>
 				      </button>
-						<span class="eventtitle"></span>
+						<h1 class="eventtitle"></h1>
 				    </div>
 			    	<div class="modal-body eventdets">
+			    	</div>
 			  </div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->

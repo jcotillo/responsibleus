@@ -23,13 +23,17 @@
 
 $('.business-click').on('click', function(event) {
 	event.preventDefault();
+  console.log('hi');
 	$('.business-signup').toggle();
+  $('.regularform').toggleClass('col-lg-offset-4');
+  $('.regularform').toggleClass('col-lg-offset-2');
 });
 
 $(document).ready(function() {
 
   // if $('body').hasClass("page-businessdash") {
-  //   $('.navbar-custom a').css("color", "black");
+  //   want to back a black background if at the homepage
+  // $('.navbar-custom a').css("color", "black");
   //   $('.a:visited').css("color", "black");
   // }
 

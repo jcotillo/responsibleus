@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507185807) do
+ActiveRecord::Schema.define(version: 20150508202601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 20150507185807) do
     t.datetime "start"
     t.datetime "end"
     t.integer  "business_id"
-    t.integer  "user_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.text     "transportationschoice"
@@ -70,7 +69,15 @@ ActiveRecord::Schema.define(version: 20150507185807) do
 
   add_index "events", ["business_id"], name: "index_events_on_business_id", using: :btree
   add_index "events", ["title"], name: "index_events_on_title", using: :btree
-  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
+
+  create_table "eventships", id: false, force: :cascade do |t|
+    t.integer "event_id",              null: false
+    t.integer "user_id",               null: false
+    t.text    "transportationschoice"
+  end
+
+  add_index "eventships", ["event_id", "user_id"], name: "index_eventships_on_event_id_and_user_id", using: :btree
+  add_index "eventships", ["user_id", "event_id"], name: "index_eventships_on_user_id_and_event_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

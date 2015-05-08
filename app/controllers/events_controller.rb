@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
   def index
-  @events = Event.where(user_id: current_user.id)
+  @events = Event.where('user_id == ? OR private == false', current_user.id)
   render :json => @events
   end
 

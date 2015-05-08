@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
 	belongs_to :business
-	belongs_to :user
+	has_many :eventships 
+	has_many :users, through: :eventships
 end
