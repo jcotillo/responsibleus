@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # validations
   validates :full_name, presence: true
-  validates :neighborhood, presence: true
+  validates :zipcode, presence: true
   validates :transportation, presence: true
   mount_uploader :profilepic, ProfilePicUploader
 
@@ -11,8 +11,13 @@ class User < ActiveRecord::Base
   # this refers to ownership 
   belongs_to :business
 
+  #private events
+  has_many :events
+
+  #public events
   has_many :eventships 
-  has_many :events, through: :eventships
+  has_many :confirmedevents, through: :eventships, class_name: 'Event', source: :event
+
 
   has_and_belongs_to_many :coupons
 
@@ -36,7 +41,11 @@ class User < ActiveRecord::Base
       end
     end
 
-    environment = footprint/total
+    if total == 0
+      return "add new events to begin racking up points!"
+    end
+
+    environment = footprint/total if total > 0
 
     if environment.between?(0, 0.2)
       return "good -- you get three coupons"

@@ -43,10 +43,10 @@
           </div>
           <div class="form-group">
            <%= business_fields.label :type_of_business %>
-          <%= business_fields.select :typeofbusiness, :class => "form-control", :options_for_select => %w[Bar Retail Restaurant Store] %>
+          <%= business_fields.select :typeofbusiness, options_for_select(%w[Bar Retail Restaurant Store]) %>
           </div>
           <div class="form-group">
-          <%= business_fields.label :zipcode %>
+          <%= business_fields.label :business_zipcode %>
           <%= business_fields.text_field :zipcode, :class => "form-control", :placeholder => '33025' %>
           </div>
           <div class="form-group">

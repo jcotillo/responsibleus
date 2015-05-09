@@ -21,14 +21,14 @@ protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u|
-      u.permit(:email, :password, :password_confirmation, :full_name, :age, :neighborhood, :transportation, :business_id, :profilepic)
+      u.permit(:email, :password, :password_confirmation, :full_name, :age, :zipcode, :transportation, :business_id, :profilepic)
     }
   end
 
 private
 
   def business_params
-    params[:user].require(:business).permit(:name, :description, :address, :typeofbusiness)
+    params[:user].require(:business).permit(:name, :description, :zipcode, :typeofbusiness)
   end
 
   # POST /resource

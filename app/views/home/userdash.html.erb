@@ -45,25 +45,37 @@
 			    </div>
 			    <div class="modal-body">
 			      <%= form_for(@event, remote: true, html: {class: "eventform"}) do |f| %>
-				  <%= f.label :title%><br>
-				  <%= f.text_field :title, class: "eventtitle" %><br>
-
-			    	 
+			       <div class="form-group">
+				  <%= f.label :title%>
+				  <%= f.text_field :title, class: "eventtitle form-control" %>
+					</div>
+			       <div class="form-group">
 				  <%= f.label :description %><br>
-				  <%= f.text_field :description, class: "eventdescription" %><br>
-
-				  <%= f.label :starts_at, class: "eventdate" %><br>
-				  <%= f.datetime_select :start, class: "eventtime", order: [ :month,:day, :year], ampm: true %><br>
-				  <%= f.label :ends_at %><br>
-				  <%= f.datetime_select :end, class: "eventend", order: [ :month, :day, :year], ampm: true %><br>
-				  <%=f.label :method_of_transportation %><br>
-		   		  <%= f.select :transportationschoice, options_for_select(%w[Bicycle Bus/Train Car], class: "transportation" ) %><br>
+				  <%= f.text_field :description, class: "eventdescription form-control" %><br>
+				  </div>
+				  <div class="form-group">
+				  <%= f.label :starts_at, class: "eventdate form-control" %></div>
+				  <div class="form-group">
+				  <%= f.datetime_select :start, class: "eventtime form-control", order: [ :month,:day, :year], ampm: true %>
+				  </div>
+				  <div class="form-group">
+				  <%= f.label :ends_at %>
+				  <%= f.datetime_select :end, class: "eventend form-control", order: [ :month, :day, :year], ampm: true %>
+				  </div>
+				  <div class="form-group">
+				  <%=f.label :method_of_transportation %>
+		   		  <%= f.select :transportationschoice, options_for_select(%w[Bicycle Bus/Train Car], class: "transportation form-control" ) %>
+		   		   </div>
 				  <% if current_user.business %>
-				    <%= check_box_tag(:private, "false") %>
+				   <div class="form-group">
+				    <%= check_box_tag(:private, "false", class: "form-control") %>
 				    <%= f.label :public_event? %>
 					<strong>we'll invite folks for you!</strong>
-				  <% end %><br>
-				  <%= f.submit remote: true, class: "eventsubmit"%>
+					</div>
+				  <% end %>
+				  <div class="form-group">
+				  <%= f.submit remote: true, class: "eventsubmit form-control"%>
+				  </div>
 				<% end %>
 			    </div>
 			  </div><!-- /.modal-content -->
