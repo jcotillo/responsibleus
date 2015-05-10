@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   end
 
   def publicevents
-  @pevents = Event.where(private: false)
+  @pevents = Event.where(private: false).where.not(business_id: current_user.business.id)
   render :json => @pevents
   end
 
@@ -20,7 +20,7 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.new event_params
-    @event.private = true unless params[:event][:private] == false 
+    @event.private = false unless params[:event][:private]
     @event.business_id = current_user.business_id if current_user.business
     @event.save!
     render :json => @event

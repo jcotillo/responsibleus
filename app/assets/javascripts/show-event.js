@@ -1,6 +1,5 @@
 function showEvent (calEvent, jsEvent, view) {
-
-    if ('calEvent.private == true') {
+    if (calEvent.private == true || calEvent.business_id == $('.userdash').data('bus')) {
    var eventtitle = calEvent.title
 
     var html = [
@@ -75,6 +74,7 @@ function showEvent (calEvent, jsEvent, view) {
 
    } 
    else {
+    console.log('woooo');
      var eventtitle = calEvent.title
 
     var html = [
@@ -83,7 +83,6 @@ function showEvent (calEvent, jsEvent, view) {
        '<h2>end:</h2>' + calEvent.end.calendar (),
        '<h2>transportation choice:</h2>' + calEvent.transportationschoice + '</div>'
   ].join('');
-    console.log('hi');
     $('.eventtitle').text(eventtitle);
     $('.eventdets').html(html);
     $('.eventsconfirmed').modal();

@@ -13,17 +13,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require_tree .
 //= require moment
 //= require jquery.purr
 //= require best_in_place
 //= require fullcalendar
 //= require jquery-ui/datepicker
 //= require jquery-ui/accordion
+//= require_tree .
 
 $('.business-click').on('click', function(event) {
 	event.preventDefault();
-  console.log('hi');
 	$('.business-signup').toggle();
   $('.regularform').toggleClass('col-lg-offset-4');
   $('.regularform').toggleClass('col-lg-offset-2');

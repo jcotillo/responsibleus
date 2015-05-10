@@ -1,5 +1,5 @@
 <div class="businessdash container-fluid">
-  <div class="bigbus row">
+  <div class="bigbus row" data-bus="<%=current_user.business.id%>">
   	<div class="col-lg-4 col-lg-offset-1">
 	  	<div class="row businessdets">
 	  		<strong>Name:</strong><% if current_user.business %>
