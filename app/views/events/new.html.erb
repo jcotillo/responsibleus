@@ -1,2 +1,19 @@
 <h3>Create a new event</h3>
 <%= render 'form' %>
+<div class="couponcheck" data-coupon="<%=current_user.coupons.length %>"> 
+<div class="modal fade eventsconfirmed">
+			<div class="modal-dialog">
+			  <div class="modal-content">
+				    <div class="modal-header">
+				      <!-- Close button -->
+				      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        <span class="modal-close">&times;</span>
+				      </button>
+						<h1 class="eventtitle"></h1>
+				    </div>
+			    	<div class="modal-body eventdets">
+			    	</div>
+			  </div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+</div>

@@ -18,8 +18,8 @@
 //= require jquery.purr
 //= require best_in_place
 //= require fullcalendar
-//= require jquery-ui
-
+//= require jquery-ui/datepicker
+//= require jquery-ui/accordion
 
 $('.business-click').on('click', function(event) {
 	event.preventDefault();

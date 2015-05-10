@@ -2,12 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .businessdash {
-	background-color: rgba(46, 138, 138, 1); 
 	height: 100%;
-}
-
-.businessdetails {
-	text-align: center;
 }
 .background-imageforest {
   background-image: image-url('forest.jpg');
@@ -61,13 +56,55 @@
 }
 .userdashback {
   background-color: #61988E;
+  padding: 10px;
 }
+// entire row with margin to not obstruct the nav
 .userdash {
   margin-top: 75px;
-  color: #D8D4F2;
 }
 .userleft {
   height: 120px;
   width: 450px;
-  margin:25px;
+  padding-left: 50px;
+}
+.usercoupons {
+    margin-top: 20px;
+    // height: 380px;
+}
+.userenvstats {
+   height: 250px;
+  width: 450px;
+}
+.businessdets {
+  font-size: 20px;
+  text-align: center;
+  margin: auto;
+}
+.businessstat {
+  padding: 35px;
+  text-align: center;
+}
+.nearby {
+  margin-top: 35px;
+}
+.businessdiv {
+  background-color: #61988E;
+  padding: 10px;
+}
+
+.userright {
+  margin-left: -90px;
+}
+
+.profilepic {
+    height: 145px;
+    width: 225px;
+    border: 2px solid black;
+    margin-left: -63px;
+}
+.bigbus {
+  margin-top: 75px;
+}
+.businessdets {
+  border: 4px dashed black;
 }

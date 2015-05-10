@@ -13,7 +13,8 @@
  *= require_tree .
  *= require_self
  *= require fullcalendar
- *= require jquery-ui
+ *= require jquery-ui/datepicker
+ *= require jquery-ui/accordion
  */
  
 @import "bootstrap-sprockets";
@@ -52,21 +53,7 @@ p {
     font-size: 18px;
     line-height: 1.5;
 }
-.userdashback {
-    padding: 10px;
-    // margin-left: -110px;
-}
-.userleft {
-    height: 138px;
-    width:450px;
-    margin: 10px 20px;
-}
 
-.profilepic {
-    height: 100%;
-    width: 100%;
-    border: 2px solid black;
-}
 
 @media(min-width:768px) {
     p {
@@ -133,13 +120,13 @@ a:focus {
     outline: 0;
     color: black;
     // color: rgba(255,255,255,.8);
-    background-color: transparent;
+    // background-color: transparent;
 }
 
 .navbar-custom .nav li a:focus,
 .navbar-custom .nav li a:active {
     outline: 0;
-    background-color: transparent;
+    // background-color: transparent;
 }
 
 .navbar-custom .nav li.active {
@@ -179,7 +166,7 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: image-url('trees.jpg') no-repeat bottom center scroll;
+    background: image-url('mountainforest.jpg') no-repeat bottom center scroll;
     // filter: opacity(.2);
     background-color: #000;
     -webkit-background-size: cover;
@@ -434,8 +421,4 @@ body {
 
 .page-businessdash {
     color:black;
-}
-.usercoupons {
-    margin-top: 20px;
-    height: 380px;
 }

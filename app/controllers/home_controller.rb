@@ -7,11 +7,13 @@ before_action :authenticate_user!, only: [:userdash, :businessdash]
 	def userdash
 		@event = Event.new
 		@count = current_user.transportation_count
+		@nearby = Business.where(zipcode: current_user.zipcode).last(5)
+		@coupons = Coupon.nearestcoupons(current_user)
 	end
 	 
 	def businessdash
 		@coupon = Coupon.new
-		@last = Coupon.last(3)
+		@last = Coupon.where(business_id: current_user.business_id)
 	end
 
 end
