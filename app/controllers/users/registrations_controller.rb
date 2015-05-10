@@ -68,9 +68,12 @@ private
   # end
 
   # You can put the params you want to permit in the empty array.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.for(:account_update) << :attribute
-  # end
+  def configure_account_update_params
+     devise_parameter_sanitizer.for(:account_update) { |u|
+      u.permit(:email, :password, :password_confirmation, :full_name, :age, :zipcode, :transportation, :business_id, :profilepic)
+    }
+    # devise_parameter_sanitizer.for(:account_update) << :attribute
+  end
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)

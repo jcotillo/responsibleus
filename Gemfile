@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-
+gem 'figaro'
+gem 'fog'
 gem 'rails_12factor', group: :production
 #for business dash
 gem 'jquery-ui-rails' 
