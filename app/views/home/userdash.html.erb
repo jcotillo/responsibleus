@@ -1,5 +1,5 @@
 <div class="background-imageforest container-fluid">
-	  <div class="userdash row" data-bus="<%=current_user.business.id%>">
+	  <div class="userdash row" data-bus="<%=current_user.business.id if current_user.business%>">
 	  	<div class="col-lg-5 col-lg-offset-1">
 		  	<div class="userleft row">
 		  		<div class="col-lg-6">
