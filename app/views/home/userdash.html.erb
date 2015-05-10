@@ -54,8 +54,7 @@
 				  <%= f.text_field :description, class: "eventdescription form-control" %><br>
 				  </div>
 				  <div class="form-group">
-				  <%= f.label :starts_at, class: "eventdate form-control" %></div>
-				  <div class="form-group">
+				  <%= f.label :starts_at, class: "eventdate" %>
 				  <%= f.datetime_select :start, class: "eventtime form-control", order: [ :month,:day, :year], ampm: true %>
 				  </div>
 				  <div class="form-group">
@@ -64,13 +63,13 @@
 				  </div>
 				  <div class="form-group">
 				  <%=f.label :method_of_transportation %>
-		   		  <%= f.select :transportationschoice, options_for_select(%w[Bicycle Bus/Train Car], class: "transportation form-control" ) %>
+		   		  <%= f.select :transportationschoice, options_for_select(%w[Bicycle Bus/Train Car Carpool Walk], class: "transportation form-control" ) %>
 		   		   </div>
 				  <% if current_user.business %>
 				   <div class="form-group">
-				    <%= check_box_tag(:private, "false", class: "form-control") %>
-				    <%= f.label :public_event? %>
-					<strong>we'll invite folks for you!</strong>
+				    <%= check_box_tag(:private, 'true', true) %>
+				    <%= f.label :private?%>
+					<strong>uncheck this box to make a public business event</strong>
 					</div>
 				  <% end %>
 				  <div class="form-group">

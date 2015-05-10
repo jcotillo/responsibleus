@@ -5,16 +5,15 @@ class User < ActiveRecord::Base
   validates :transportation, presence: true
   mount_uploader :profilepic, ProfilePicUploader
 
-  has_many :customerships
-  # this refers to clientele
-  has_many :businesses, through: :customerships 
   # this refers to ownership 
+  has_many :customerships
+  has_many :businesses, through: :customerships 
   belongs_to :business
 
   #private events
   has_many :events
 
-  #public events
+  #refers to local events posted by businesses registered
   has_many :eventships 
   has_many :confirmedevents, through: :eventships, class_name: 'Event', source: :event
 
@@ -30,11 +29,11 @@ class User < ActiveRecord::Base
     total = events.length
     footprint = 0 
     events.each do |e| 
-      if e.transportationschoice == "Car-alone" 
+      if e.transportationschoice == "Car" 
         footprint += 1 
       elsif e.transportationschoice == "Bus/Train" 
         footprint += 0.5
-      elsif e.transportationschoice == "carpool" 
+      elsif e.transportationschoice == "Carpool" 
         footprint += 0.8  
       else
         footprint += 0

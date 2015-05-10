@@ -6,6 +6,7 @@ devise_for :users, controllers: {registrations: 'users/registrations', :omniauth
 resources :coupons
 resources :events
 
+get 'publicevents' => 'events#publicevents'
 
 devise_scope :user do
 get '/auth/google_oauth2/callback' => 'omniauth_callbacks#google_oauth2'

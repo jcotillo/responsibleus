@@ -1,8 +1,13 @@
 class EventsController < ApplicationController
 
   def index
-  @events = Event.where('user_id == ? OR private == false', current_user.id)
+  @events = Event.where(user_id: current_user.id)
   render :json => @events
+  end
+
+  def publicevents
+  @pevents = Event.where(private: false)
+  render :json => @pevents
   end
 
   def new
@@ -15,6 +20,7 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.new event_params
+    @event.private = true unless params[:event][:private] == false 
     @event.business_id = current_user.business_id if current_user.business
     @event.save!
     render :json => @event

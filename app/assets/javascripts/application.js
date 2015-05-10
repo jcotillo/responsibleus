@@ -40,31 +40,58 @@ $(document).ready(function() {
     $( "#accordion" ).accordion();
     
     var calendar = $('#calendar').fullCalendar({
-        events: "/events.json",
+        // events: "/events.json",
+          eventSources: [
+
+        // your event source
+        {
+            url: "/events.json", // use the `url` property
+            color: 'blue',    // an option!
+            textColor: 'black'  // an option!
+        },  
+
+        {
+           url: "/publicevents.json", // use the `url` property
+           color: 'yellow',    // an option!
+           textColor: 'black'  // an option!
+        }
+
+        // any other sources...
+
+        ],
         selectable: true,
         selectHelper: true,
         allDayDefault: false,
         allDaySlot: false,
         firstHour: 6,
         borderColor: '#61988E',
-        
+        timeFormat: 'h(:mm)',
+        editable: true, 
+       eventClick: showEvent,
+      eventRender: function(event, element) {
+        if ('event.private == true' ) {
+         BackgroundColor: '#c38282'
+        }
+        else {
+          BackgroundColor: '#878585'
+        };
+    },
+
       dayClick: function(date, allDay, jsEvent, view) {
+          var today = new Date();
+           if (date < today){
+              alert('You cant choose a date that already past.');
+              $("#calendar").fullCalendar("unselect");     
+              return   
+            }
              $('#event_end_3i > option[value="'+ date.format("D") +'"]').attr('selected','selected');
              $('#event_start_3i > option[value="'+ date.format("D") +'"]').attr('selected','selected');
              $('.date').text(date.format("MMM Do YYYY"));
              $('.js-modal').modal();
-             var today = Date.today;
 
       // moment comparison ? 
-           if (date < today){
-              alert('You cant choose a date that already past.');
-              $("#calendar").fullCalendar("unselect");        
-            }
         },
 
-       eventClick: showEvent,
-        timeFormat: 'h(:mm)',
-        editable: true, 
     });
     $('.eventsubmit').on('click', function () {
             var start = $('.eventstart').val();
@@ -85,7 +112,6 @@ $(document).ready(function() {
                         transportation: transportation,
                         'private': publicmaybe                           
                     },
-                    dateType: 'json',
                     success: function (event) {
                       alert(json.msg);
                       $("#calendar").fullCalendar("renderEvent", eventData, true);
@@ -95,8 +121,7 @@ $(document).ready(function() {
                         console.log(resp);
                       }
                 });
+            // $("#calendar").fullCalendar("refetchEvents");
             $('.js-modal').modal('hide');
-            $("#calendar").fullCalendar("renderEvent", eventData, true);
-            $("#calendar").fullCalendar("refetchEvents");
            });
 });
