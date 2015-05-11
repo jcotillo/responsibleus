@@ -1,20 +1,23 @@
 <div class="businessdash container-fluid">
   <div class="bigbus row">
   	<div class="col-lg-4 col-lg-offset-1">
-	  	<div class="row businessdets">
+	  	<div class="row businessdiv businessdets">
 	  		<strong>Name:</strong><% if current_user.business %>
 	  		<%= current_user.business.name %>
 	  		<% else %>
 	  		why no name?
 	  		<% end %><br>
 	  		<strong>Description:</strong><%= current_user.business.description %><br>
-	  		<strong>Zipcode:</strong><%= current_user.business.zipcode %><br>
 	  	</div>
 		<div class="businessdiv row">
+		<h4><%= current_user.business.name %> Public Events</h4>
+		<% @events.each do |event| %>
+			<span class="glyphicon glyphicon-user" aria-hidden="true"></span> <strong><a href="#"><%=event.user.full_name%></strong></a> is attending
+			<%=event.event.title%>
+		<%end %>
 		</div>
 		<div class="businessdiv row">
-			<button><%= link_to("create a new coupon", new_coupon_path) %></button>
-			<strong>Coupons up right now:</strong>
+			<h4>Coupons up right now:</h4>
 			<div id="accordion" class="col-md-12">
 			<%@last.each do |coupon| %> 
 			  <h3><%=coupon.title %> <% if coupon.expiration %>
@@ -30,9 +33,10 @@
 			  </div>
 		</div>
 	</div>
-    <div class="col-lg-5 col-lg-offset-1 businessstat businessdiv">
+    <div class="col-lg-5 col-lg-offset-1 businesssurvey">
     	<div class="row">
-    		<h4>How green you are doing so far?</h4>
+    	  <div class="col-lg-10 col-lg-offset-1">
+    		<h4>How green is <%=current_user.business.name %> so far?</h4>
     		Recycling: 
     		<div class="progress">
 			  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
@@ -41,22 +45,24 @@
 			</div>
 			electricity usage:
 			<div class="progress">
-			  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+			  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
 			    <span class="sr-only">20% Complete</span>
 			  </div>
 			</div>
 		    waste reduction:
 			<div class="progress">
-			  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+			  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
 			    <span class="sr-only">60% Complete (warning)</span>
 			  </div>
 			</div>
 			usage of environmental friendly products: 
 			<div class="progress">
-			  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+			  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 			    <span class="sr-only">80% Complete (danger)</span>
 			  </div>
 			</div>
+			<%= button_to "Update stats to create a new coupon", new_coupon_path, :class => "btn btn-success btn-lg btn-block", :method => :get %>
+		  </div>
 		</div>
 		<div class="row">
 		</div>

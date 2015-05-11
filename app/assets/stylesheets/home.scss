@@ -39,6 +39,7 @@
 }
 .calendarback {
  background-color: rgba(97, 152, 142, 1);
+border-radius: 10px;
   z-index: 2;
 }
 .businessdash {
@@ -57,6 +58,7 @@
 .userdashback {
   background-color: #61988E;
   padding: 10px;
+  border-radius: 10px;
 }
 // entire row with margin to not obstruct the nav
 .userdash {
@@ -76,20 +78,22 @@
   width: 450px;
 }
 .businessdets {
-  font-size: 20px;
-  text-align: center;
-  margin: auto;
+  font-size: 17px;
 }
-.businessstat {
-  padding: 35px;
-  text-align: center;
+.businesssurvey {
+  background-color: #61988E;
+  padding: 10px;
+  border-radius: 20px;
 }
 .nearby {
   margin-top: 35px;
 }
 .businessdiv {
+  margin-top:10px;
   background-color: #61988E;
   padding: 10px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .userright {
@@ -105,6 +109,6 @@
 .bigbus {
   margin-top: 75px;
 }
-.businessdets {
-  border: 4px dashed black;
+.btn-block{
+  margin-top: 6px;
 }

@@ -10,7 +10,6 @@ function showEvent (calEvent, jsEvent, view) {
        '<h2>end:</h2>' + calEvent.end.calendar (),
        '<h2>transportation choice:</h2>' + calEvent.transportationschoice + '</div>'
   ].join('');
-    console.log('hi');
     $('.eventtitle').text(eventtitle);
     $('.eventdets').html(html);
     $('.eventsconfirmed').modal();
@@ -74,20 +73,18 @@ function showEvent (calEvent, jsEvent, view) {
 
    } 
    else {
-    console.log('woooo');
      var eventtitle = calEvent.title
-     console.log(calEvent);
     var html = [
-      '<div class="btn-group"><button class="btn btn-info">Click here to join event</button><button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'
+      '<div class="btn-group"><button class="btn btn-info">Click here to join event</button><button type="button" class="btn btn-info dropdown-toggle droppingdown" data-toggle="dropdown" aria-expanded="false">'
     + '<span class="caret"></span>' +
     '<span class="sr-only">Toggle Dropdown</span>' +
   '</button>' +
       '<ul class="dropdown-menu" role="menu">' +
-    '<li><a href="#" class="eventjoin" data-choice="Car">Car</a></li>' +
-   '<li><a href="#" class="eventjoin data-choice="Carpool">Carpool</a></li>' +
-    '<li><a href="#" class="eventjoin data-choice="Bus">Bus</a></li>' +
-    '<li><a href="#" class="eventjoin data-choice="Train">Train</a></li>' +
-    '<li><a href="#" class="eventjoin data-choice="Walk">Walk</a></li>'+
+    '<li><a href="#" data-choice="car" class="eventjoin" value="car">Car</a></li>' +
+   '<li><a href="#" class="eventjoin" data-choice="Carpool">Carpool</a></li>' +
+    '<li><a href="#" class="eventjoin" data-choice="Bus">Bus</a></li>' +
+    '<li><a href="#" class="eventjoin" data-choice="Train">Train</a></li>' +
+    '<li><a href="#" class="eventjoin" data-choice="Walk">Walk</a></li>'+
   '</ul></div>'+
   '<h2>description:</h2>' + calEvent.description, 
        '<h2>start:</h2>' + calEvent.start.calendar (),
@@ -99,23 +96,22 @@ function showEvent (calEvent, jsEvent, view) {
 
    }
 
-    $('.eventjoin').on('click', function () {
-        console.log( $('.eventjoin').data("choice") );
+    $('.dropdown-menu li a').on('click', function () {
+        console.log(  $(this).data('choice') ) ;
         // if (answer == true ) { 
-        //    $.ajax({
-        //         type: 'POST',
-        //         url: '/eventships/' + calEvent.id + '.json',
-        //         data: {
-        //           transportationschoice: $('.eventjoin').data('choice')
-        //           } 
-        //         success: function () {
-        //           $('.eventsconfirmed').modal('hide');
-        //         },
-        //         error: function () {
-        //           console.debug(url)
-        //           console.debug('WHY WHY WHY WHY WHY WHY')
-        //         }
-        //      })
+           $.ajax({
+                type: 'POST',
+                url: '/eventships/' + calEvent.id, 
+                data: {
+                  transportationschoice:  $(this).data('choice')
+                  }, 
+                success: function () {
+                  $('.eventsconfirmed').modal('hide');
+                },
+                error: function () {
+                  console.debug('WHYyyyyyyyyyyyyyyyyy')
+                }
+             })
         // }
       });
 

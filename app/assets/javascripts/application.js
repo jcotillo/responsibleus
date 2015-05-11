@@ -112,7 +112,6 @@ $(document).ready(function() {
                         'private': publicmaybe                           
                     },
                     success: function (event) {
-                      alert(json.msg);
                       $("#calendar").fullCalendar("renderEvent", eventData, true);
                       $("#calendar").fullCalendar("refetchEvents");
                       },

@@ -7,7 +7,7 @@ resources :coupons
 resources :events
 
 get 'publicevents' => 'events#publicevents'
-get 'eventships/:id' => 'events#eventships'
+post 'eventships/:id' => 'events#eventships'
 
 
 devise_scope :user do

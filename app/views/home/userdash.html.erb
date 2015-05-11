@@ -23,10 +23,14 @@
 		  		<%= link_to("edit", edit_user_registration_path) %>
 		  		</div>
 		  	</div>
-		  	<div class="userdashback userleft row nearby" data-zip="<%=current_user.zipcode%>"><h4>You are eligible for:<%= @count %></h4>
-
+		  	<div class="userdashback userleft row nearby" data-zip="<%=current_user.zipcode%>"><h6>You are eligible for the following coupons:</h6>
+		  	<ul>
+		  		<% @coupons.each do |coupon| %>
+		  		<li><strong><%= coupon.title %></li></strong>
+		  		<%end %>
+		  	<ul>
 		  	</div>
-			<div class="userdashback userenvstats row usercoupons"><strong><u>footprint status:</u></strong><br>
+			<div class="userdashback userenvstats row usercoupons"><h6>Personal footprint:</h6>
 			Green transportations choices so far (walking or biking):
 			<div class="progress">
 			  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="<%= @greenevents %>" aria-valuemin="0" aria-valuemax="<%=@all %>" style="width:<%= number_to_percentage((@greenevents.to_f / @all) * 100, precision: 0) %>">
