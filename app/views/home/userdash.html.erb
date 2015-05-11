@@ -24,10 +24,11 @@
 		  		</div>
 		  	</div>
 		  	<div class="userdashback userleft row nearby" data-zip="<%=current_user.zipcode%>"><h6>You are eligible for the following coupons:</h6>
-		  	<ul>
+		  	<ul><% if @coupons != nil %>
 		  		<% @coupons.each do |coupon| %>
 		  		<li><strong><%= coupon.title %></li></strong>
 		  		<%end %>
+		  		<% end %>
 		  	<ul>
 		  	</div>
 			<div class="userdashback userenvstats row usercoupons"><h6>Personal footprint:</h6>
