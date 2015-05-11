@@ -33,6 +33,7 @@
 		  	</div>
 			<div class="userdashback userenvstats row usercoupons"><h6>Personal footprint:</h6>
 			Green transportations choices so far (walking or biking):
+			<% if @all != nil %>
 			<div class="progress">
 			  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="<%= @greenevents %>" aria-valuemin="0" aria-valuemax="<%=@all %>" style="width:<%= number_to_percentage((@greenevents.to_f / @all) * 100, precision: 0) %>">
 			    <span class="sr-only"><%= @greenevents / @all %> Complete (success)</span>
@@ -53,6 +54,10 @@
 			    <%= number_to_percentage((@redevents.to_f / @all) * 100, precision: 0) %>
 			  </div>
 			</div>
+		 <% else %>
+		 	No data to start measuring footprint yet! Add events to get started.
+		 <% end %>
+
 			</div>
 		</div>
 	    <div class="col-lg-6 calendarback userright">
