@@ -102,9 +102,9 @@
 		   		   </div>
 				  <% if current_user.business %>
 				   <div class="form-group">
-				    <%= check_box_tag(:private, 'true', true) %>
-				    <%= f.label :private?%>
-					<strong>uncheck this box to make a public business event</strong>
+				    <%= check_box_tag(:private, 'false', true) %>
+				    <%= f.label :public?%>
+					<strong>we'll invite folks for you!</strong>
 					</div>
 				  <% end %>
 				  <div class="form-group">

@@ -33,7 +33,7 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.new event_params
-    @event.private = false unless params[:event][:private]
+    @event.private = true unless params[:event][:private]
     @event.business_id = current_user.business_id if current_user.business
     @event.save!
     render :json => @event
