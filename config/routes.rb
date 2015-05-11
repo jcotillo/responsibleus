@@ -7,9 +7,11 @@ resources :coupons
 resources :events
 
 get 'publicevents' => 'events#publicevents'
+get 'eventships/:id' => 'events#eventships'
+
 
 devise_scope :user do
-get '/auth/google_oauth2/callback' => 'omniauth_callbacks#google_oauth2'
+post '/auth/google_oauth2/callback' => 'omniauth_callbacks#google_oauth2'
 end
 
   root to: "home#index"

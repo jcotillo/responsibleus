@@ -1,5 +1,14 @@
 class EventsController < ApplicationController
 
+  def eventships
+    event = Event.find(params[:id])
+    real = event.eventships.new eventship_params
+    real.business_id = event.business.id
+    real.user_id = current_user.id
+    real.save
+    render :json => @real
+  end
+
   def index
   @events = Event.where(user_id: current_user.id)
   render :json => @events
@@ -62,6 +71,10 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :description, :start, :end, :transportationschoice, :private)
+  end
+
+  def eventship_params
+    params.require(:event).permit(:transportationschoice)
   end
 
 end

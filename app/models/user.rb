@@ -47,13 +47,13 @@ class User < ActiveRecord::Base
     environment = footprint/total if total > 0
 
     if environment.between?(0, 0.2)
-      return "good -- you get three coupons"
+      return "three coupons"
     elsif  environment.between?(0.20, 0.45)
-      return "ok-- you get two coupons"
+      return "two coupons"
      elsif  environment.between?(0.45, 0.75)
-      return "poor....improve by making greener choices! Here is a pity coupon"
+      return "one coupon"
     else
-      return "no...just no."
+      return "one coupon"
     end
   end
 
