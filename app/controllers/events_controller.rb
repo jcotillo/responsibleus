@@ -15,7 +15,11 @@ class EventsController < ApplicationController
   end
 
   def publicevents
+    if current_user.business
   @pevents = Event.where(private: false).where.not(business_id: current_user.business.id)
+  else 
+  @pevents = Event.where(private: false)
+  end
   render :json => @pevents
   end
 
