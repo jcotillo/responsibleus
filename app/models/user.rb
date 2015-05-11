@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
     end
 
     if total == 0
-      return "add new events to begin racking up points!"
+      return "0"
     end
 
     environment = footprint/total if total > 0
