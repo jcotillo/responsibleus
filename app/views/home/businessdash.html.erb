@@ -13,7 +13,7 @@
 		<h4><%= current_user.business.name %> Public Events</h4>
 		<% @events.each do |event| %>
 			<span class="glyphicon glyphicon-user" aria-hidden="true"></span> <strong><a href="#"><%=event.user.full_name%></strong></a> is attending
-			<%=event.event.title%>
+			<%=event.event.title%><br>
 		<%end %>
 		</div>
 		<div class="businessdiv row">
