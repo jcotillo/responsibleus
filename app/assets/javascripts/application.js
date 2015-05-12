@@ -92,34 +92,47 @@ $(document).ready(function() {
         },
 
     });
-    $('.eventsubmit').on('click', function () {
-            var start = $('.eventstart').val();
-            var title = $('.eventtitle').val();
-            var description =  $('.eventdescription').val();
-            var end =  $('.eventend').val();
-            var transportation =  $('.transportation').val();
-            var publicmaybe = $('.private').val();
-
-             $.ajax({
-                    type: 'POST',
-                    url: '/events.json',
-                    data: {
-                        title: title,
-                        description: description,
-                        start: start,
-                        end: end,
-                        transportation: transportation,
-                        'private': publicmaybe                           
-                    },
-                    success: function (event) {
-                      $("#calendar").fullCalendar("renderEvent", eventData, true);
-                      $("#calendar").fullCalendar("refetchEvents");
-                      },
-                    error: function (resp) {
-                        console.log(resp);
-                      }
-                });
-            // $("#calendar").fullCalendar("refetchEvents");
-            $('.js-modal').modal('hide');
-           });
+    $('.eventsubmit').on('click', submitEvent);
 });
+
+function submitEvent(evt, eventId) {
+  evt.preventDefault();
+  var start = $('.eventstart').val();
+  var title = $('.eventtitle').val();
+  var description =  $('.eventdescription').val();
+  var end =  $('.eventend').val();
+  var transportation =  $('.transportation').val();
+  var publicmaybe = $('.private').val();
+
+  var type, url;
+  console.log(eventId);
+  if (eventId) {
+    type = 'PATCH';
+    url = '/events/' + eventId + '.json';
+  } else {
+    type = 'POST';
+    url = '/events.json';
+  }
+  $.ajax({
+    type: type,
+    url: url,
+    data: {
+      event: {
+        title: title,
+        description: description,
+        start: start,
+        end: end,
+        transportation: transportation,
+        'private': publicmaybe 
+      }                          
+    },
+    success: function (event) {
+      window.location = '/dash';
+    },
+    error: function (resp) {
+      console.log(resp);
+    }
+  });
+  // $("#calendar").fullCalendar("refetchEvents");
+  $('.js-modal').modal('hide');
+};
