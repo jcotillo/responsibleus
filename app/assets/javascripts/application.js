@@ -67,15 +67,6 @@ $(document).ready(function() {
         timeFormat: 'h(:mm)',
         editable: true, 
        eventClick: showEvent,
-      eventRender: function(event, element) {
-        if ('event.private == true' ) {
-         BackgroundColor: '#c38282'
-        }
-        else {
-          BackgroundColor: '#878585'
-        };
-    },
-
       dayClick: function(date, allDay, jsEvent, view) {
           var today = new Date();
            if (date < today){
@@ -87,8 +78,6 @@ $(document).ready(function() {
              $('#event_start_3i > option[value="'+ date.format("D") +'"]').attr('selected','selected');
              $('.date').text(date.format("MMM Do YYYY"));
              $('.js-modal').modal();
-
-      // moment comparison ? 
         },
 
     });
@@ -97,11 +86,11 @@ $(document).ready(function() {
 
 function submitEvent(evt, eventId) {
   evt.preventDefault();
-  var start = $('.eventstart').val();
   var title = $('.eventtitle').val();
   var description =  $('.eventdescription').val();
-  var end =  $('.eventend').val();
-  var transportation =  $('.transportation').val();
+  var start =$('#event_start_1i').val() + '-' +$('#event_start_2i').val() +  '-' + $('#event_start_3i').val() + ' ' + $('#event_start_4i').val()  + ':' +$('#event_start_5i').val()
+  var end =  $('#event_end_1i').val() + '-' +$('#event_end_2i').val() +  '-' + $('#event_end_3i').val() + ' ' + $('#event_end_4i').val()  + ':' +$('#event_end_5i').val()
+  var transportation =  $('#event_transportationschoice').val();
   var publicmaybe = $('.private').val();
 
   var type, url;
@@ -122,7 +111,7 @@ function submitEvent(evt, eventId) {
         description: description,
         start: start,
         end: end,
-        transportation: transportation,
+        transportationschoice: transportation,
         'private': publicmaybe 
       }                          
     },
@@ -133,6 +122,6 @@ function submitEvent(evt, eventId) {
       console.log(resp);
     }
   });
-  // $("#calendar").fullCalendar("refetchEvents");
+  $("#calendar").fullCalendar("refetchEvents");
   $('.js-modal').modal('hide');
 };

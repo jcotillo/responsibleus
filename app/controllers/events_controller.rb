@@ -9,13 +9,18 @@ class EventsController < ApplicationController
     render :json => real
   end
 
+  def confirmed
+    confirmed = current_user.confirmedevents.find_by(id: params[:id])
+    render :json => confirmed
+  end
+
   def index
   @events = Event.where(user_id: current_user.id)
   render :json => @events
   end
 
   def publicevents
-    if current_user.business
+  if current_user.business
   @pevents = Event.where(private: false).where.not(business_id: current_user.business.id)
   else 
   @pevents = Event.where(private: false)
@@ -26,7 +31,7 @@ class EventsController < ApplicationController
   def new
   @event = Event.new
   # respond_to do |format|
-  #     format.html # new.html.erb
+  #     format.html # new.html.erb 
   #     format.json { render :json => @event }
   #   end
   end
