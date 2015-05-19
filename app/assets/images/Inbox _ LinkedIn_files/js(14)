@@ -1,0 +1,162 @@
+(function(){var a=LIModules.requires("BaseControl"),c=LIModules.imports("Bidi"),e=LIModules.requires("jquery"),b=LIModules.requires("underscore");
+var d=a.extend(function(l){var v,F,j,u,g,y,h,D,B,s,r="animated",x="auto",A="body",p="id",w="shown",m="pending",k=e(document),C=e(window),t=50,f=250,i=5,o=0,E=null,n=true,z=false;
+h={MOUSEOVER:"mouseover",MOUSEOUT:"mouseout",FOCUS:"focus",BLUR:"blur",KEYDOWN:"keydown"};
+D={ESCAPE:27};
+j={animation:"animationend",webkitAnimation:"webkitAnimationEnd",MozAnimation:"mozAnimationEnd",OAnimation:"oanimationend"};
+u={DESCRIBED_BY:"aria-describedby",ROLE:"role",TABINDEX:"tabIndex"};
+y={BOTTOM:"bottom",TOP:"top",RIGHT:"right",LEFT:"left"};
+v={TOP:"fade-in-down",BOTTOM:"fade-in-up",RIGHT:"fade-in-left",LEFT:"fade-in-right"};
+B={TOOLTIP:"tooltip",OVERLAY:"tooltip-overlay",CONTENT:"tooltip-content",ARROW:"tooltip-arrow",CONTAINER:"tooltip-content-container"};
+s={TOOLTIP_ALREADY_SHOWING:"Tooltip already showing.",TOOLTIP_CLOSED_BEFORE_FULLY_OPENED:"Tooltip closed before it fully opened.",USER_INTERACTING_TOOLTIP:"User is interacting with tooltip.",USER_MOUSEOUT:"User is no long hovering."};
+g={delayOpen:t,delayClose:f,doAnimate:n,direction:y.BOTTOM,isFlippable:n,offsetExtra:i,offsetX:o,offsetY:o,type:B.TOOLTIP,width:x,tooltipContentID:E,dependencies:["scripts/shared/Bidi"],cssDependencies:["css!scss/modules/tooltip"]};
+function q(){var H=document.body;
+for(var G in j){if(typeof H.style[G]!=="undefined"){return j[G]
+}}}F=q();
+return{beforeDecoration:function(){var G=this._$el;
+this._config=b.defaults(this._config,g);
+if(b.isUndefined(G.attr(u.TABINDEX))){G.attr(u.TABINDEX,0)
+}},attachEventListeners:function(){this._$el.on(h.MOUSEOVER+" "+h.FOCUS,this._setTriggerMouseover).on(h.MOUSEOUT+" "+h.BLUR,this._removeTriggerMouseover)
+},_attachTooltipListeners:function(){this.$overlay.on(h.MOUSEOVER,this._setTooltipMouseover).on(h.MOUSEOUT,this._removeTooltipMouseover)
+},_attachOpenListeners:function(){k.on(h.KEYDOWN,this._closeIfEscapeKey)
+},_setTriggerMouseover:function(){this.isMouseoverTrigger=n;
+this.open()
+},_removeTriggerMouseover:function(){this.isMouseoverTrigger=z;
+this.close()
+},_setTooltipMouseover:function(){this.isMouseoverTooltip=n
+},_removeTooltipMouseover:function(){this.isMouseoverTooltip=z;
+this.close()
+},_closeIfEscapeKey:function(G){if(G.which===D.ESCAPE){this._hideTooltip()
+}},detachEventListeners:function(){this._$el.off(h.MOUSEOVER+" "+h.FOCUS,this._setTriggerMouseover).off(h.MOUSEOUT+" "+h.BLUR,this._removeTriggerMouseover);
+if(this.$overlay){this.$overlay.off(h.MOUSEOVER,this._setTooltipMouseover).off(h.MOUSEOUT,this._removeTooltipMouseover)
+}this._detachOpenListeners()
+},_detachOpenListeners:function(){k.off(h.KEYDOWN,this._closeIfEscapeKey)
+},destroy:function(){this.detachEventListeners();
+if(this.$overlay){this.$overlay.remove()
+}},_loadCss:function(){return this.loadCss(this._config.cssDependencies)
+},open:function(){var G;
+if(this._isOpening&&this._isOpening.state()===m){return this._isOpening.promise()
+}this._isOpening=G=new e.Deferred();
+if(!this.$overlay){this._loadCss().then(this._onFirstOpen).then(this._open).then(G.resolve,G.reject)
+}else{this._open().then(G.resolve,G.reject)
+}return G.then(b.bind(this._attachOpenListeners,this)).promise()
+},_open:function(){var G=new e.Deferred(),H=this;
+if(this.isMouseoverTrigger===z){return G.reject(new Error(s.USER_MOUSEOUT)).promise()
+}if(!this.showTimer){this.showTimer=b.delay(function(){H._showTooltip().then(G.resolve)
+},this._config.delayOpen)
+}else{G.reject(new Error(s.TOOLTIP_ALREADY_SHOWING))
+}return G.promise()
+},_onFirstOpen:function(){var G=this._config;
+if(c){G.offsetX=c.flip(G.offsetX,-G.offsetX)
+}this.createOverlay();
+this.setContent();
+this.isCreating=false
+},_showTooltip:function(){var H=new e.Deferred(),I=this._config,G=this.$overlay,J=this;
+this.currentDirection=I.direction;
+G.addClass(w).appendTo(e(A));
+this.calculatePosition();
+if(I.isFlippable){this._setTooltipStyling(G)
+}if(F&&I.doAnimate){G.one(F,function(){H.resolve(J)
+})
+}else{H.resolve(this)
+}return H.promise()
+},close:function(){var G=new e.Deferred(),H=this;
+if(this.showTimer&&this._isOpening&&this._isOpening.state()===m){clearTimeout(this.showTimer);
+this._isOpening.reject(new Error(s.TOOLTIP_CLOSED_BEFORE_FULLY_OPENED))
+}b.delay(function(){H._close().then(G.resolve,G.reject)
+},this._config.delayClose);
+return G.then(this._detachOpenListeners).promise()
+},_close:function(){var G=new e.Deferred();
+if(!this.isMouseoverTooltip&&!this.isMouseoverTrigger){this._hideTooltip();
+G.resolve(this)
+}else{G.reject(new Error(s.USER_INTERACTING_TOOLTIP))
+}return G.promise()
+},_hideTooltip:function(){this.showTimer=null;
+if(this.$overlay){this.$overlay.removeClass(w).detach()
+}},createOverlay:function(){var G=e("<div/>").attr(p,B.OVERLAY),H=e("<span/>").addClass(B.ARROW);
+G.append(H);
+this._setTooltipStyling(G);
+this.$overlay=G;
+this._attachTooltipListeners()
+},setContent:function(){var G=e("<div/>").addClass(B.CONTENT),H=this._setContent();
+this._addAccessibility(H);
+G.append(H);
+this.$overlay.prepend(G)
+},_setContent:function(){var G=E,H;
+if(this._config.tooltipContentID){G=e("#"+this._config.tooltipContentID);
+H=G.parent();
+if(H.hasClass(B.CONTAINER)&&H.children().length===1){H.remove()
+}}return G
+},_addAccessibility:function(H){var G=this._$el.attr(u.DESCRIBED_BY),I=H.attr(u.ROLE);
+if(b.isUndefined(G)){this._$el.attr(u.DESCRIBED_BY,this._config.tooltipContentID)
+}if(b.isUndefined(I)){H.attr(u.ROLE,B.TOOLTIP)
+}},_setTooltipStyling:function(H){var I=this._config,K=I.type,L=this.currentDirection||I.direction,G=I.doAnimate,J=[K,"tooltip-"+L];
+H.removeClass();
+if(I.overlayClasses){J.push(I.overlayClasses)
+}H.addClass(J.join(" ")).css({width:I.width});
+if(this.showTimer){H.addClass(w)
+}if(G){H.addClass(r+" "+v[L.toUpperCase()])
+}},_isFlippable:function(G){return this._config.isFlippable&&!G
+},_isAboveViewport:function(G){return G<C.scrollTop()
+},_isBelowViewport:function(G){return G>(C.height()+C.scrollTop())
+},_isLeftOfViewport:function(G){return G<C.scrollLeft()
+},_isRightOfViewport:function(G){return G>(C.width()+C.scrollLeft())
+},calculatePosition:function(){var M={},H=this._config,L=this._$el.offset(),K=L.top,J=L.left,G=c&&c.flip(y.RIGHT,y.LEFT)||y.RIGHT,I=c&&c.flip(y.LEFT,y.RIGHT)||y.LEFT;
+this.currentTop=K;
+this.currentLeft=J;
+switch(H.direction){case y.BOTTOM:M=this.calculateBottom();
+break;
+case y.TOP:M=this.calculateTop();
+break;
+case G:M=this.calculateRight();
+break;
+case I:M=this.calculateLeft();
+break;
+default:M=this.calculateBottom()
+}this.$overlay.css(M);
+return M
+},calculateBottom:function(L){var I=this._config,N=this.$overlay,O=this._$el,G,K,H,M,J;
+L=L||false;
+G=N.outerHeight()+I.offsetExtra;
+H=O.outerWidth()/2;
+K=(N.outerWidth()/2);
+M=this.currentTop-G+I.offsetY;
+J=this.currentLeft-K+H+I.offsetX;
+if(this._isFlippable(L)&&this._isAboveViewport(M)){this.currentDirection=y.TOP;
+return this.calculateTop(true)
+}else{return{top:M,left:J}
+}},calculateTop:function(M){var J=this._config,O=this.$overlay,P=this._$el,G,L,I,H,N,K;
+M=M||false;
+G=P.outerHeight()+J.offsetExtra;
+I=P.outerWidth()/2;
+L=(O.outerWidth()/2);
+N=this.currentTop+G+J.offsetY;
+K=this.currentLeft-L+I+J.offsetX;
+H=N+O.outerHeight();
+if(this._isFlippable(M)&&this._isBelowViewport(H)){this.currentDirection=y.BOTTOM;
+return this.calculateBottom(true)
+}else{return{top:N,left:K}
+}},calculateLeft:function(K){var H=this._config,O=this.$overlay,P=this._$el,G,J,L,N,M,I;
+K=K||false;
+J=P.outerWidth()+H.offsetExtra;
+L=P.outerHeight()/2;
+G=(O.outerHeight()/2);
+M=this.currentTop-G+L+H.offsetY;
+I=this.currentLeft+J+H.offsetX;
+N=I+O.outerWidth();
+if(this._isFlippable(K)&&this._isRightOfViewport(N)){this.currentDirection=y.RIGHT;
+return this.calculateRight(true)
+}else{return{top:M,left:I}
+}},calculateRight:function(K){var H=this._config,N=this.$overlay,O=this._$el,G,J,L,M,I;
+K=K||false;
+J=N.outerWidth()+H.offsetExtra;
+L=O.outerHeight()/2;
+G=(N.outerHeight()/2);
+M=this.currentTop-G+L+H.offsetY;
+I=this.currentLeft-J+H.offsetX;
+if(this._isFlippable(K)&&this._isLeftOfViewport(I)){this.currentDirection=y.LEFT;
+return this.calculateLeft(true)
+}else{return{top:M,left:I}
+}}}
+});
+LIModules.exports("Tooltip",d)
+}());

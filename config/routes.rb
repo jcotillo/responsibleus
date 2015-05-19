@@ -7,6 +7,7 @@ resources :coupons
 resources :events
 
 get 'publicevents' => 'events#publicevents'
+get 'confirmed/:id' => 'events#confirmed'
 post 'eventships/:id' => 'events#eventships'
 
 

@@ -8,15 +8,17 @@ before_action :authenticate_user!, only: [:userdash, :businessdash]
 		@event = Event.new
 		@count = current_user.transportation_count 
 		@nearby = Business.where(zipcode: current_user.zipcode).last(5)
-		if current_user.business
-		@coupons = Coupon.where.not(business_id: current_user.business.id).last(@count) 
-		else 
-		@coupons = Coupon.last(@count) 
-		end
 		@all = current_user.events.all.length
-		@greenevents = current_user.events.where('transportationschoice=? OR transportationschoice=?', "Walk", "Bicycle").length
-		@blueevents = current_user.events.where('transportationschoice=? OR transportationschoice=? OR transportationschoice=? OR transportationschoice=?', "Carpool", "Bus", "Train", "Bus/Train").length
-		@redevents = current_user.events.where('transportationschoice=?', "Car").length
+		@greenevents = current_user.green
+		@blueevents = current_user.blue
+		@redevents = current_user.red
+
+		
+		if current_user.business
+			@coupons = Coupon.where.not(business_id: current_user.business.id).last(@count) 
+		else 
+			@coupons = Coupon.last(@count) 
+		end
 	end
 	 
 	def businessdash

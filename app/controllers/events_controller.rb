@@ -9,13 +9,22 @@ class EventsController < ApplicationController
     render :json => real
   end
 
+  def confirmed
+    confirmed = current_user.confirmedevents.find_by(id: params[:id])
+    render :json => confirmed
+  end
+
   def index
-  @events = Event.where(user_id: current_user.id)
-  render :json => @events
+    @events = Event.where(user_id: current_user.id)
+    @pevents  = Event.greensort
+    respond_to do |format|
+      format.html # index.html.erb 
+      format.json { render :json => @events }
+    end
   end
 
   def publicevents
-    if current_user.business
+  if current_user.business
   @pevents = Event.where(private: false).where.not(business_id: current_user.business.id)
   else 
   @pevents = Event.where(private: false)
@@ -25,10 +34,6 @@ class EventsController < ApplicationController
 
   def new
   @event = Event.new
-  # respond_to do |format|
-  #     format.html # new.html.erb
-  #     format.json { render :json => @event }
-  #   end
   end
 
   def create
@@ -50,7 +55,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     respond_to do |format|
-      if @event.update_attributes(params[:event])
+      if @event.update_attributes(event_params)
         format.html { redirect_to @event, :notice => 'Event was successfully updated.' }
         format.json { head :no_content }
       else
