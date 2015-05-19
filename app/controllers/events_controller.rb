@@ -15,8 +15,12 @@ class EventsController < ApplicationController
   end
 
   def index
-  @events = Event.where(user_id: current_user.id)
-  render :json => @events
+    @events = Event.where(user_id: current_user.id)
+    @pevents  = Event.greensort
+    respond_to do |format|
+      format.html # index.html.erb 
+      format.json { render :json => @events }
+    end
   end
 
   def publicevents
@@ -30,10 +34,6 @@ class EventsController < ApplicationController
 
   def new
   @event = Event.new
-  # respond_to do |format|
-  #     format.html # new.html.erb 
-  #     format.json { render :json => @event }
-  #   end
   end
 
   def create

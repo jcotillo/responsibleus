@@ -25,6 +25,18 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,  :omniauthable, :omniauth_providers => [:google_oauth2]
 
+def green
+  events.where('transportationschoice=? OR transportationschoice=?', "Walk", "Bicycle").length
+end
+
+def blue
+  events.where('transportationschoice=? OR transportationschoice=? OR transportationschoice=? OR transportationschoice=?', "Carpool", "Bus", "Train", "Bus/Train").length
+end
+
+def red
+  events.where('transportationschoice=?', "Car").length
+end
+
   def transportation_count
     total = events.length
     footprint = 0 

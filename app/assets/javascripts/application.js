@@ -111,7 +111,7 @@ function submitEvent(evt, eventId) {
         description: description,
         start: start,
         end: end,
-        transportationschoice: transportation,
+         transportationschoice: transportation,
         'private': publicmaybe 
       }                          
     },

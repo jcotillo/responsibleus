@@ -20,3 +20,25 @@
 	 z-index: 9999;
 	 color:black;
 }
+
+.pevents {
+	margin-top: 75px;
+}
+.list {
+	background-color: rgba(46, 126, 138, 0.6); 
+	margin: auto;
+	border-radius: 4px;
+}
+.grassback {
+  background-image: image-url('grass.jpg');
+  background-size: cover;
+  height: 100%;
+  left: 0;
+  right: 0;
+}
+.plist {
+	color: white;
+}
+.eventinfo {
+	display: hidden;
+}
