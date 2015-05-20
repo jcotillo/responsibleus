@@ -1,4 +1,4 @@
- $(function() {
+$(function() {
    $('.couponsurvey').modal();
    $('.continue').on('click', function() {
    	  $('.couponsurvey').modal('hide');
@@ -78,5 +78,29 @@
             counter++;
         });
         $('#display-json').html(JSON.stringify(checkedItems, null, '\t'));
+    });
+    $('.continue').on('click', function() {
+        var electricity = $("ul.electricity > .list-group-item-primary").length
+        var recycle = $("ul.recycling > .list-group-item-primary").length
+        var trans = $("ul.transportation > .list-group-item-primary").length
+        var total = electricity + recycle + trans
+        $.ajax({
+        type: 'POST',
+        url: '/greenpoints/create',
+        data: {
+          business: {
+            electricity: electricity,
+            recycling: recycle,
+            transportation: trans,
+            total: total,
+          }                          
+        },
+        success: function (event) {
+          console.log('wooo');
+        },
+        error: function (resp) {
+          console.log(resp);
+        }
+        });
     });
   });

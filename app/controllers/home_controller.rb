@@ -12,8 +12,6 @@ before_action :authenticate_user!, only: [:userdash, :businessdash]
 		@greenevents = current_user.green
 		@blueevents = current_user.blue
 		@redevents = current_user.red
-
-		
 		if current_user.business
 			@coupons = Coupon.where.not(business_id: current_user.business.id).last(@count) 
 		else 
@@ -25,6 +23,7 @@ before_action :authenticate_user!, only: [:userdash, :businessdash]
 		@coupon = Coupon.new
 		@events = current_user.business.eventships
 		@last = Coupon.where(business_id: current_user.business_id)
+		@points = current_user.business.greenpoints.last
 	end
 
 end

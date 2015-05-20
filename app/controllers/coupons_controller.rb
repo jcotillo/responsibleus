@@ -71,4 +71,5 @@ class CouponsController < ApplicationController
     def coupon_params
       params.require(:coupon).permit(:title, :description, :amount, :business_id, :expiration)
     end
+    
 end

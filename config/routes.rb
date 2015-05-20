@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-
+  get 'greenpoints/new'
+  post 'greenpoints/create' 
+  get 'greenpoints/edit'
+  post 'greenpoints/update'
 
 devise_for :users, controllers: {registrations: 'users/registrations', :omniauth_callbacks => 'users/omniauth_callbacks'}
 

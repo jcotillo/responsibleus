@@ -11,4 +11,5 @@ class Business < ActiveRecord::Base
   has_many :events, through: :eventships
 
   has_many :coupons
+  has_many :greenpoints
 end
