@@ -1,16 +1,16 @@
-Responsible Us
+# Responsible Us #
 http://www.responsibleus.herokuapp.com
-How it works:
-Sign up as a regular user, or a Business owner (link on top of sign-up form) to begin
-Create new events in the calendar to begin a personal environmental footprint
-Become eligible for coupons offered by businesses in the network
-As a business, the app requires improvement in order to submit new coupons to the customerbase
+* How it works:
+1. Sign up as a regular user, or a Business owner (link on top of sign-up form) to begin
+2. Create new events in the calendar to begin a personal environmental footprint
+3. Become eligible for coupons offered by businesses in the network
+4. As a business, the app requires improvement in order to submit new coupons to the customerbase
 
-Technologies used:
-Ruby on Rails
-jQuery / AJAX
-API to handle events & business footprint points
-Fullcalendar gem
+* Technologies used:
+1. Ruby on Rails
+2. jQuery / AJAX
+3. API to handle events & business footprint points
+4. Fullcalendar gem
 
-Context:
-Nine day final project for Ironhack, exemplifying Rails and Javascript skill level.
+* Context:
+ + Nine day final project for Ironhack, exemplifying Rails and Javascript skill level.
