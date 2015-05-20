@@ -1,4 +1,4 @@
-*Responsible Us*
+Responsible Us
 ======
 
 http://www.responsibleus.herokuapp.com
@@ -16,4 +16,4 @@ http://www.responsibleus.herokuapp.com
 4. Fullcalendar gem
 
 * *Context:*
- Nine day final project for Ironhack, exemplifying Rails and Javascript skill level.
+ * Nine day final project for Ironhack, exemplifying Rails and Javascript skill level.
