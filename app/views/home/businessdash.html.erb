@@ -51,7 +51,7 @@
 			</div>
 		    Business transportation:
 			<div class="progress">
-			  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= @points.transportation %>" aria-valuemin="0" aria-valuemax="<%= @points.total %>" style="width: "<%= number_to_percentage((@points.transportation.to_f / @points.total) * 100, precision: 0) %>">
+			  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= @points.transportation %>" aria-valuemin="0" aria-valuemax="<%= @points.total %>" style="width: <%= number_to_percentage((@points.transportation.to_f / @points.total) * 100, precision: 0) %>">
 			    <span class="sr-only">60% Complete (warning)</span>
 			  </div>
 			</div>
